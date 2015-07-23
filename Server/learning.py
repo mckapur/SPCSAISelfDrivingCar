@@ -104,7 +104,6 @@ class AbstractLearningClient:
     def streamInput(self, X, y):
         self.X = np.append(self.X, X)
         self.y = np.append(self.y, y)
-    def endInputStream(self):
         self.configureNeuralNetwork(True)
         self.persistanceManager.persistData(self.X, self.y, self.weights)
     def output(X):
@@ -120,6 +119,7 @@ class MotionHandler:
         self.learningClient = AbstractLearningClient(MOTION_HANDLER_NAME)
     def receivedNewMotionData(self, data):
     def endedReceivingMotionData(self):
+    def reinforceMotionData(self, data):
     def suggestedMotionResponseFromData(data):
     def delete:
         return self.learningClient.wipe()
