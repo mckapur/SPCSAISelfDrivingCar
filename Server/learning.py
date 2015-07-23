@@ -61,43 +61,65 @@ class NeuralNetwork:
         return a
 
 DATA_DUMP_DIRECTORY = "data_dump"
-INPUT_X_DUMP_FILENAME = "input_X_dump.npy"
-INPUT_y_DUMP_FILENAME = "input_y_dump.npy"
-WEIGHTS_DUMP_FILENAME = "weights_dump.npy"
+INPUT_X_DUMP_FILENAME = "_input_X_"
+INPUT_y_DUMP_FILENAME = "_input_y_"
+WEIGHTS_DUMP_FILENAME = "_weights_"
+DATA_DUMP_SUFFIX = "dump.npy"
 
 class PersistanceManager:
+    def __init__(namespace):
+        self.namespace = namespace
+    def relPathFromFilename(self, filename):
+        return DATA_DUMP_DIRECTORY + filename + self.namespace + DATA_DUMP_SUFFIX
     def persistData(X=[], y=[], weights=[]):
-        np.save(DATA_DUMP_DIRECTORY + INPUT_X_DUMP_FILENAME, X)
-        np.save(DATA_DUMP_DIRECTORY + INPUT_y_DUMP_FILENAME, y)
-        np.save(DATA_DUMP_DIRECTORY + WEIGHTS_DUMP_FILENAME, weights)
+        np.save(self.relPathFromFilename(INPUT_X_DUMP_FILENAME), X)
+        np.save(self.relPathFromFilename(INPUT_y_DUMP_FILENAME), y)
+        np.save(self.relPathFromFilename(WEIGHTS_DUMP_FILENAME), weights)
     def getPersistedData(self):
-        X = np.load(DATA_DUMP_DIRECTORY + INPUT_X_DUMP_FILENAME)
-        y = np.load(DATA_DUMP_DIRECTORY + INPUT_y_DUMP_FILENAME)
-        weights = np.load(DATA_DUMP_DIRECTORY + WEIGHTS_DUMP_FILENAME)
+        X = np.load(self.relPathFromFilename(INPUT_X_DUMP_FILENAME))
+        y = np.load(self.relPathFromFilename(INPUT_y_DUMP_FILENAME))
+        weights = np.load(self.relPathFromFilename(WEIGHTS_DUMP_FILENAME))
         return {'X': X, 'y': y, 'weights': weights}
     def wipePersistedData(self):
         self.persistData()
 
-class LearningClient:
-    def __init__(self):
-        self.persistanceManager = PersistanceManager()
-        data = self.persistanceManager.getPersistedData();
+class AbstractLearningClient:
+    def __init__(self, name):
+        self.persistanceManager = PersistanceManager(name)
+        data = self.persistanceManager.getPersistedData()
         self.X = data['X']
         self.y = data['y']
         self.weights = data['weights']
-    def beginInputStream(self):
-        # Append
+        self.configureNeuralNetwork(False)
+    def configureNeuralNetwork(self, shouldTrain):
+        inputColumnSize = self.X.shape[1]
+        hiddenColumnSize = inputColumnSize
+        outputColumnSize = self.y.shape[1]
+        self.net = NeuralNetwork([inputColumnSize, hiddenColumnSize, outputColumnSize])
+        if shouldTrain:
+            self.net.train(self.X, self.y)
+        else:
+            self.net.weights = self.weights
+        self.weights = self.net.weights
+    def streamInput(self, X, y):
+        self.X = np.append(self.X, X)
+        self.y = np.append(self.y, y)
     def endInputStream(self):
-        # Train on X/y and persist
+        self.configureNeuralNetwork(True)
+        self.persistanceManager.persistData(self.X, self.y, self.weights)
+    def output(X):
+        self.net.predict(X)
+    def wipe(self):
+        self.wipePersistedData
+        return True
 
-nn = NeuralNetwork([2, 2, 2])
-X = np.array([
-	[0, 0], 
-	[0, 1], 
-	[1, 0], 
-	[1, 1]
-])
-y = np.array([[0, 0.5], [1, 0.3], [1, 0.4], [0, 0.6]])
-nn.train(X, y)
-for i in range(len(y)):
-	print(y[i], nn.predict(X[i]))
+MOTION_HANDLER_NAME = 'MOTION_HANDLER'
+
+class MotionHandler:
+    def __init__(self):
+        self.learningClient = AbstractLearningClient(MOTION_HANDLER_NAME)
+    def receivedNewMotionData(self, data):
+    def endedReceivingMotionData(self):
+    def suggestedMotionResponseFromData(data):
+    def delete:
+        return self.learningClient.wipe()
