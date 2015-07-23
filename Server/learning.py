@@ -63,7 +63,6 @@ INPUT_X_DUMP_FILENAME = "_input_X_"
 INPUT_y_DUMP_FILENAME = "_input_y_"
 WEIGHTS_DUMP_FILENAME = "_weights_"
 DATA_DUMP_SUFFIX = "dump.npy"
-
 class PersistanceManager:
     def __init__(self, namespace):
         self.namespace = namespace
@@ -108,19 +107,35 @@ class AbstractLearningClient:
         self.configureNeuralNetwork(True)
         self.persistanceManager.persistData(self.X, self.y, self.weights)
     def output(self, X):
-        self.net.predict(X)
+        return self.net.predict(X)
     def wipe(self):
         self.persistanceManager.wipePersistedData()
         self.restoreFromPersistance()
         return True
 
 MOTION_HANDLER_NAME = 'MOTION_HANDLER'
-
 class MotionHandler:
     def __init__(self):
         self.learningClient = AbstractLearningClient(MOTION_HANDLER_NAME)
-    def receivedNewMotionData(self, data):
-    def reinforceMotionData(self, data):
+    def motionDataToInput(self):
+        data = motionData['data']
+        X = []
+        y = []
+        for i in (len(data) - 1):
+            X[i] = data[i]['frontDistanceToObject']
+            y[i] = [data[i]['isAccelerating'], data[i]['isDecelerating'], data[i]['isBraking']]
+        return {'X': X, 'y': y}
+    def receivedNewMotionData(self, motionData):
+        data = self.motionDataToInput()
+        self.learningClient.streamInput(data['X'], data['y'])
     def suggestedMotionResponseFromData(self, data):
+        data = self.motionDataToInput()
+        output = self.learningClient.output(data['X'], data['y'])
+        response = {}
+        for i in (len(output) - 1):
+            if np.amax(output) == output[i]:
+                response
+    # def reinforceMotionData(self, data):
+    # def penalizeMotionData(self, data):
     def delete(self):
         return self.learningClient.wipe()
