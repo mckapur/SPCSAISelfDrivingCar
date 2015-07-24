@@ -61,27 +61,27 @@ class NeuralNetwork:
         return a
 
 DATA_DUMP_DIRECTORY = "data_dump"
-INPUT_X_DUMP_FILENAME = "_input_X_"
-INPUT_y_DUMP_FILENAME = "_input_y_"
-WEIGHTS_DUMP_FILENAME = "_weights_"
-DATA_DUMP_SUFFIX = "dump.npy"
+INPUT_X_DUMP_FILENAME = "input_X"
+INPUT_y_DUMP_FILENAME = "input_y"
+WEIGHTS_DUMP_FILENAME = "weights"
+NPY_EXTENSION = '.npy'
 class PersistanceManager:
     def __init__(self, namespace):
         self.namespace = namespace
-    def relPathFromFilename(self, filename):
-        return DATA_DUMP_DIRECTORY + filename + self.namespace + DATA_DUMP_SUFFIX
+    def relPathFromFilename(self, filename, extension):
+        return DATA_DUMP_DIRECTORY + "_" + filename + "_" + self.namespace + extension
     def persistData(self, X=np.array([]), y=np.array([]), weights=[]):
-        np.save(self.relPathFromFilename(INPUT_X_DUMP_FILENAME), X)
-        np.save(self.relPathFromFilename(INPUT_y_DUMP_FILENAME), y)
-        with open(self.relPathFromFilename(INPUT_y_DUMP_FILENAME), 'wb') as f:
+        np.save(self.relPathFromFilename(INPUT_X_DUMP_FILENAME, NPY_EXTENSION), X)
+        np.save(self.relPathFromFilename(INPUT_y_DUMP_FILENAME, NPY_EXTENSION), y)
+        with open(self.relPathFromFilename(WEIGHTS_DUMP_FILENAME, ''), 'wb') as f:
             pickle.dump(weights, f)
     def getPersistedData(self):
         X = np.array([])
         y = np.array([])
         weights = []
-        pathToX = self.relPathFromFilename(INPUT_X_DUMP_FILENAME)
-        pathToY = self.relPathFromFilename(INPUT_y_DUMP_FILENAME)
-        pathToWeights = self.relPathFromFilename(WEIGHTS_DUMP_FILENAME)
+        pathToX = self.relPathFromFilename(INPUT_X_DUMP_FILENAME, NPY_EXTENSION)
+        pathToY = self.relPathFromFilename(INPUT_y_DUMP_FILENAME, NPY_EXTENSION)
+        pathToWeights = self.relPathFromFilename(WEIGHTS_DUMP_FILENAME, '')
         if os.path.isfile(pathToX):
             X = np.load(pathToX)
         if os.path.isfile(pathToY):
@@ -136,7 +136,7 @@ LEARNING_HANDLER_NAME_MOTION = 'LEARNING_HANDLER_NAME_MOTION'
 class MotionHandler:
     def __init__(self):
         self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, [1, 1, 3])
-    def motionDataToInput(self, data):
+    def motionDataToTrainingInput(self, data):
         length = len(data)
         X = [[]] * length
         y = [[]] * length
@@ -148,12 +148,13 @@ class MotionHandler:
                 data[i]['isBraking']
             ]
         return {'X': X, 'y': y}
+    def motionDataToPredictionInput(self, data):
+        return [data['frontDistanceToObject']]
     def receivedNewMotionData(self, data):
-        data = self.motionDataToInput(data)
+        data = self.motionDataToTrainingInput(data)
         self.learningClient.streamInput(data['X'], data['y'])
     def suggestedMotionResponseFromData(self, data):
-        data = self.motionDataToInput()
-        output = self.learningClient.output(data['X'], data['y'])
+        output = self.learningClient.output(self.motionDataToPredictionInput(data))
         response = {}
         for i in range(len(output)):
             if i == 0:
