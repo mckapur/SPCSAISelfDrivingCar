@@ -7,6 +7,8 @@ Networks and other Machine Learning
 algorithms.
 """
 
+import os
+import pickle
 import numpy as np
 
 def sigmoid(x):
@@ -39,9 +41,9 @@ class NeuralNetwork:
             i = np.random.randint(X.shape[0])
             a = [X[i]]
             for l in range(len(self.weights)):
-                    dot_value = np.dot(a[l], self.weights[l])
-                    activation = self.activation(dot_value)
-                    a.append(activation)
+                dot_value = np.dot(a[l], self.weights[l])
+                activation = self.activation(dot_value)
+                a.append(activation)
             error = y[i] - a[-1]
             deltas = [error * self.dactivation(a[-1])]
             for l in range(len(a) - 2, 0, -1): 
@@ -68,42 +70,59 @@ class PersistanceManager:
         self.namespace = namespace
     def relPathFromFilename(self, filename):
         return DATA_DUMP_DIRECTORY + filename + self.namespace + DATA_DUMP_SUFFIX
-    def persistData(self, X=[], y=[], weights=[]):
+    def persistData(self, X=np.array([]), y=np.array([]), weights=[]):
         np.save(self.relPathFromFilename(INPUT_X_DUMP_FILENAME), X)
         np.save(self.relPathFromFilename(INPUT_y_DUMP_FILENAME), y)
-        np.save(self.relPathFromFilename(WEIGHTS_DUMP_FILENAME), weights)
+        with open(self.relPathFromFilename(INPUT_y_DUMP_FILENAME), 'wb') as f:
+            pickle.dump(weights, f)
     def getPersistedData(self):
-        X = np.load(self.relPathFromFilename(INPUT_X_DUMP_FILENAME))
-        y = np.load(self.relPathFromFilename(INPUT_y_DUMP_FILENAME))
-        weights = np.load(self.relPathFromFilename(WEIGHTS_DUMP_FILENAME))
+        X = np.array([])
+        y = np.array([])
+        weights = []
+        pathToX = self.relPathFromFilename(INPUT_X_DUMP_FILENAME)
+        pathToY = self.relPathFromFilename(INPUT_y_DUMP_FILENAME)
+        pathToWeights = self.relPathFromFilename(WEIGHTS_DUMP_FILENAME)
+        if os.path.isfile(pathToX):
+            X = np.load(pathToX)
+        if os.path.isfile(pathToY):
+            y = np.load(pathToY)
+        if os.path.isfile(pathToWeights):
+            with open(pathToWeights, 'rb') as f:
+                weights = pickle.load(f)
         return {'X': X, 'y': y, 'weights': weights}
     def wipePersistedData(self):
         self.persistData()
 
 class AbstractLearningClient:
-    def __init__(self, name):
+    def __init__(self, name, architecture):
+        self.name = name
         self.restoreFromPersistance()
+        self.initializeNeuralNetwork(architecture)
+    def initializeNeuralNetwork(self, architecture):
+        self.net = NeuralNetwork(architecture)
         self.configureNeuralNetwork(False)
     def restoreFromPersistance(self):
-        if not self.persistanceManager:
-            self.persistanceManager = PersistanceManager(name)
+        if not hasattr(self, 'persistanceManager'):
+            self.persistanceManager = PersistanceManager(self.name)
         data = self.persistanceManager.getPersistedData()
         self.X = data['X']
         self.y = data['y']
         self.weights = data['weights']
     def configureNeuralNetwork(self, shouldTrain):
-        inputColumnSize = self.X.shape[1]
-        hiddenColumnSize = inputColumnSize
-        outputColumnSize = self.y.shape[1]
-        self.net = NeuralNetwork([inputColumnSize, hiddenColumnSize, outputColumnSize])
         if shouldTrain:
             self.net.train(self.X, self.y)
-        else:
+        elif len(self.weights):
             self.net.weights = self.weights
         self.weights = self.net.weights
     def streamInput(self, X, y):
-        self.X = np.append(self.X, X)
-        self.y = np.append(self.y, y)
+        if not len(self.X):
+            self.X = np.array(X)
+        else:
+            self.X = np.concatenate((self.X, X))
+        if not len(self.y):
+            self.y = np.array(y)
+        else:
+            self.y = np.concatenate((self.y, y))
         self.configureNeuralNetwork(True)
         self.persistanceManager.persistData(self.X, self.y, self.weights)
     def output(self, X):
@@ -113,29 +132,39 @@ class AbstractLearningClient:
         self.restoreFromPersistance()
         return True
 
-MOTION_HANDLER_NAME = 'MOTION_HANDLER'
+LEARNING_HANDLER_NAME_MOTION = 'LEARNING_HANDLER_NAME_MOTION'
 class MotionHandler:
     def __init__(self):
-        self.learningClient = AbstractLearningClient(MOTION_HANDLER_NAME)
-    def motionDataToInput(self):
-        data = motionData['data']
-        X = []
-        y = []
-        for i in (len(data) - 1):
-            X[i] = data[i]['frontDistanceToObject']
-            y[i] = [data[i]['isAccelerating'], data[i]['isDecelerating'], data[i]['isBraking']]
+        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, [1, 1, 3])
+    def motionDataToInput(self, data):
+        length = len(data)
+        X = [[]] * length
+        y = [[]] * length
+        for i in range(length):
+            X[i] = [data[i]['frontDistanceToObject']]
+            y[i] = [
+                data[i]['isAccelerating'],
+                data[i]['isDecelerating'],
+                data[i]['isBraking']
+            ]
         return {'X': X, 'y': y}
-    def receivedNewMotionData(self, motionData):
-        data = self.motionDataToInput()
+    def receivedNewMotionData(self, data):
+        data = self.motionDataToInput(data)
         self.learningClient.streamInput(data['X'], data['y'])
     def suggestedMotionResponseFromData(self, data):
         data = self.motionDataToInput()
         output = self.learningClient.output(data['X'], data['y'])
         response = {}
-        for i in (len(output) - 1):
-            if np.amax(output) == output[i]:
-                response
+        for i in range(len(output)):
+            if i == 0:
+                responseType = 'shouldAccelerate'
+            elif i == 1:
+                responseType = 'shouldDecelerate'
+            elif i == 2:
+                responseType = 'shouldBrake'
+            response[responseType] = (np.amax(output) == output[i])
+        return response
     # def reinforceMotionData(self, data):
     # def penalizeMotionData(self, data):
-    def delete(self):
+    def wipe(self):
         return self.learningClient.wipe()
