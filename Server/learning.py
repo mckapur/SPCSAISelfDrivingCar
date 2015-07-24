@@ -37,6 +37,8 @@ class NeuralNetwork:
     def train(self, X, y, learning_rate=0.2, iters=100000):
         ones = np.atleast_2d(np.ones(X.shape[0]))
         X = np.concatenate((ones.T, X), axis=1)
+        print X
+        print y
         for k in range(iters):
             i = np.random.randint(X.shape[0])
             a = [X[i]]
@@ -53,7 +55,8 @@ class NeuralNetwork:
                 layer = np.atleast_2d(a[i])
                 delta = np.atleast_2d(deltas[i])
                 self.weights[i] += learning_rate * layer.T.dot(delta)
-            if k % 10000 == 0: print 'iters:', k
+            if k % 10000 == 0:
+                print 'iters:', k
     def predict(self, x):
         a = np.concatenate((np.ones(1).T, np.array(x)), axis=1)      
         for l in range(0, len(self.weights)):
@@ -135,7 +138,7 @@ class AbstractLearningClient:
 LEARNING_HANDLER_NAME_MOTION = 'LEARNING_HANDLER_NAME_MOTION'
 class MotionHandler:
     def __init__(self):
-        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, [1, 1, 3])
+        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, [1, 1, 1, 3])
     def motionDataToTrainingInput(self, data):
         length = len(data)
         X = [[]] * length
@@ -163,7 +166,10 @@ class MotionHandler:
                 responseType = 'shouldDecelerate'
             elif i == 2:
                 responseType = 'shouldBrake'
-            response[responseType] = (np.amax(output) == output[i])
+            if np.amax(output) == output[i]:
+                response[responseType] = 1
+            else:
+                response[responseType] = 0
         return response
     # def reinforceMotionData(self, data):
     # def penalizeMotionData(self, data):

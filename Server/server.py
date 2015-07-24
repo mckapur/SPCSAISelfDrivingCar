@@ -39,13 +39,13 @@ class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 		response = self.learningServer.handleRequest(path, body)
 		responseData = response['data']
 		error = response['error']
-		self.send_header("Content-Type", "application/json")
-		self.end_headers()
 		if error:
 			self.send_response(400)
 		else:
 			self.send_response(200)
-		self.wfile.write(json.dumps(response))
+		self.send_header("Content-Type", "application/json")
+		self.end_headers()
+		self.wfile.write(json.dumps(responseData))
 
 class LearningServer():
 	def __init__(self):
