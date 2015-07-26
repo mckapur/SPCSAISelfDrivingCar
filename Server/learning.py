@@ -37,8 +37,6 @@ class NeuralNetwork:
     def train(self, X, y, learning_rate=0.2, iters=100000):
         ones = np.atleast_2d(np.ones(X.shape[0]))
         X = np.concatenate((ones.T, X), axis=1)
-        print X
-        print y
         for k in range(iters):
             i = np.random.randint(X.shape[0])
             a = [X[i]]
@@ -105,6 +103,7 @@ class AbstractLearningClient:
         self.net = NeuralNetwork(architecture)
         self.configureNeuralNetwork(False)
     def restoreFromPersistance(self):
+        print "called?"
         if not hasattr(self, 'persistanceManager'):
             self.persistanceManager = PersistanceManager(self.name)
         data = self.persistanceManager.getPersistedData()
@@ -138,7 +137,7 @@ class AbstractLearningClient:
 LEARNING_HANDLER_NAME_MOTION = 'LEARNING_HANDLER_NAME_MOTION'
 class MotionHandler:
     def __init__(self):
-        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, [1, 1, 1, 3])
+        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, [1, 1, 3])
     def motionDataToTrainingInput(self, data):
         length = len(data)
         X = [[]] * length

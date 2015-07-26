@@ -35,6 +35,7 @@ class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 		if not hasattr(self, 'learningServer'):
 			self.learningServer = LearningServer()
 		body = json.loads(self.rfile.read(int(self.headers.getheader('Content-Length', 0))))
+		print body
 		path = self.path
 		response = self.learningServer.handleRequest(path, body)
 		responseData = response['data']
