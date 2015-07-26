@@ -48,6 +48,8 @@ class PersistanceManager:
                 return data
         return None
 
+TRAINING_DATA_DUMP_NAME = "training_data"
+NEURAL_NET_DUMP_NAME = "neural_net"
 class AbstractLearningClient:
     def __init__(self, name, architecture):
         self.name = name
@@ -60,8 +62,8 @@ class AbstractLearningClient:
     def restoreFromPersistance(self):
         if not hasattr(self, 'persistanceManager'):
             self.persistanceManager = PersistanceManager(self.name)
-        self.net = self.persistanceManager.getPersistedData('net')
-        trainingData = self.persistanceManager.getPersistedData('trainingData')
+        self.net = self.persistanceManager.getPersistedData(NEURAL_NET_DUMP_NAME)
+        trainingData = self.persistanceManager.getPersistedData(TRAINING_DATA_DUMP_NAME)
         if trainingData:
             self.X = trainingData['X']
             self.y = trainingData['y']
@@ -71,7 +73,7 @@ class AbstractLearningClient:
     def configureNeuralNetwork(self, shouldTrain):
         if shouldTrain:
             self.net.train(self.X, self.y)
-            self.persistanceManager.persistData(self.net, 'net')
+            self.persistanceManager.persistData(self.net, NEURAL_NET_DUMP_NAME)
     def streamInput(self, X, y):
         if not len(self.X):
             self.X = np.array(X)
@@ -82,7 +84,7 @@ class AbstractLearningClient:
         else:
             self.y = np.concatenate((self.y, y))
         self.configureNeuralNetwork(True)
-        self.persistanceManager.persistData({'X': self.X, 'y': self.y}, 'trainingData')
+        self.persistanceManager.persistData({'X': self.X, 'y': self.y}, TRAINING_DATA_DUMP_NAME)
     def output(self, x):
         return self.net.predict(x)
 
