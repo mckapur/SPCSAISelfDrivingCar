@@ -145,7 +145,6 @@ class MotionHandler:
             X[i] = [data[i]['frontDistanceToObject']]
             y[i] = [
                 data[i]['isAccelerating'],
-                data[i]['isDecelerating'],
                 data[i]['isBraking']
             ]
         return {'X': X, 'y': y}
@@ -160,8 +159,6 @@ class MotionHandler:
         for i in range(len(output)):
             if i == 0:
                 responseType = 'shouldAccelerate'
-            elif i == 1:
-                responseType = 'shouldDecelerate'
             elif i == 2:
                 responseType = 'shouldBrake'
             if np.amax(output) == output[i]:

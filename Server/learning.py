@@ -25,9 +25,10 @@ class NeuralNetwork:
         ds.setField('input', X)
         ds.setField('target', y)
         self.net = buildNetwork(self.numFeatures, 100, self.numLabels, outclass=SoftmaxLayer, bias=True)
-        trainer = BackpropTrainer(self.net, ds, learningrate=0.12)
+        trainer = BackpropTrainer(self.net, ds)
         print 'Training now....'
-        trainer.trainUntilConvergence(validationProportion=0.1)
+        trainer.trainUntilConvergence(validationProportion=0.1, maxEpochs=1000)
+        print 'Done training'
     def predict(self, x):
         return self.net.activate(x)
 
@@ -91,7 +92,7 @@ class AbstractLearningClient:
 LEARNING_HANDLER_NAME_MOTION = 'LEARNING_HANDLER_NAME_MOTION'
 class MotionHandler:
     def __init__(self):
-        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, {'inputWidth': 1, 'outputLength': 3})
+        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, {'inputWidth': 1, 'outputLength': 2})
     def motionDataToTrainingInput(self, data):
         length = len(data)
         X = [[]] * length
@@ -100,7 +101,6 @@ class MotionHandler:
             X[i] = [data[i]['frontDistanceToObject']]
             y[i] = [
                 data[i]['isAccelerating'],
-                data[i]['isDecelerating'],
                 data[i]['isBraking']
             ]
         return {'X': X, 'y': y}
@@ -116,8 +116,6 @@ class MotionHandler:
             if i == 0:
                 responseType = 'shouldAccelerate'
             elif i == 1:
-                responseType = 'shouldDecelerate'
-            elif i == 2:
                 responseType = 'shouldBrake'
             if np.amax(output) == output[i]:
                 response[responseType] = 1
