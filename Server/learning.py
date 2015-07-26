@@ -92,20 +92,20 @@ class AbstractLearningClient:
 LEARNING_HANDLER_NAME_MOTION = 'LEARNING_HANDLER_NAME_MOTION'
 class MotionHandler:
     def __init__(self):
-        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, {'inputWidth': 1, 'outputLength': 2})
+        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, {'inputWidth': 2, 'outputLength': 2})
     def motionDataToTrainingInput(self, data):
         length = len(data)
         X = [[]] * length
         y = [[]] * length
         for i in range(length):
-            X[i] = [data[i]['frontDistanceToObject']]
+            X[i] = [data[i]['frontDistanceToObject'], data[i]['rightDistanceToObject']/data[i]['leftDistanceToObject']]
             y[i] = [
                 data[i]['isAccelerating'],
                 data[i]['isBraking']
             ]
         return {'X': X, 'y': y}
     def motionDataToPredictionInput(self, data):
-        return [data['frontDistanceToObject']]
+        return [data['frontDistanceToObject'], data['rightDistanceToObject']/data['leftDistanceToObject']]
     def receivedNewMotionData(self, data):
         data = self.motionDataToTrainingInput(data)
         self.learningClient.streamInput(data['X'], data['y'])
@@ -124,3 +124,42 @@ class MotionHandler:
         return response
     # def reinforceMotionData(self, data):
     # def penalizeMotionData(self, data):
+
+LEARNING_HANDLER_NAME_STEERING = 'LEARNING_HANDLER_NAME_STEERING'
+class SteeringHandler:
+    def __init__(self):
+        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_STEERING, {'inputWidth': 2, 'outputLength': 3})
+    def steeringDataToTrainingInput(self, data):
+        length = len(data)
+        X = [[]] * length
+        y = [[]] * length
+        for i in range(length):
+            X[i] = [1/data[i]['frontDistanceToObject'], data[i]['rightDistanceToObject']/data[i]['leftDistanceToObject']]
+            y[i] = [
+                data[i]['isTurningLeft'],
+                data[i]['isTurningRight'],
+                data[i]['isKeepingStraight']
+            ]
+        return {'X': X, 'y': y}
+    def steeringDataToPredictionInput(self, data):
+        return [1/data['frontDistanceToObject'], data['rightDistanceToObject']/data['leftDistanceToObject']]
+    def receivedNewSteeringData(self, data):
+        data = self.steeringDataToTrainingInput(data)
+        self.learningClient.streamInput(data['X'], data['y'])
+    def suggestedSteeringResponseFromData(self, data):
+        output = self.learningClient.output(self.steeringDataToPredictionInput(data))
+        response = {}
+        for i in range(len(output)):
+            if i == 0:
+                responseType = 'shouldTurnLeft'
+            elif i == 1:
+                responseType = 'shouldTurnRight'
+            elif i == 2:
+                responseType = 'shouldKeepStraight'
+            if np.amax(output) == output[i]:
+                response[responseType] = 1
+            else:
+                response[responseType] = 0
+        return response
+    # def reinforceSteeringData(self, data):
+    # def penalizeSteeringData(self, data):

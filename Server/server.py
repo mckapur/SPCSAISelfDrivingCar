@@ -6,9 +6,9 @@ from the frontend to process and respond
 with a determinstic output.
 """
 
-import learning
 import BaseHTTPServer
 import json
+import learning
 
 HOST_NAME = 'localhost'
 PORT_NUMBER = 8000
@@ -19,6 +19,7 @@ GET_DRIVING_DATA_ROUTE = '/getDrivingData'
 
 # Driving Control Types
 DRIVING_CONTROL_TYPE_MOTION = 'motion'
+DRIVING_CONTROL_TYPE_STEERING = 'steering'
 
 class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 	def do_HEAD(self):
@@ -47,15 +48,20 @@ class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 class LearningServer():
 	def __init__(self):
 		self.motionHandler = learning.MotionHandler()
+		self.steeringHandler = learning.SteeringHandler()
 	def handleRequest(self, path, body):
 		response = {}
 		error = False
 		if path == SEND_DRIVING_DATA_ROUTE:
 			if body['type'] == DRIVING_CONTROL_TYPE_MOTION:
 				self.motionHandler.receivedNewMotionData(body['data'])
+			elif body['type'] == DRIVING_CONTROL_TYPE_STEERING:
+				self.steeringHandler.receivedNewSteeringData(body['data'])
 		elif path == GET_DRIVING_DATA_ROUTE:
 			if body['type'] == DRIVING_CONTROL_TYPE_MOTION:
 				response = self.motionHandler.suggestedMotionResponseFromData(body['data'])
+			elif body['type'] == DRIVING_CONTROL_TYPE_STEERING:
+				response = self.steeringHandler.suggestedSteeringResponseFromData(body['data'])
 		return {'data': response, 'error': error}
 
 if __name__ == "__main__":
