@@ -20,17 +20,14 @@ class NeuralNetwork:
     def __init__(self, numFeatures, numLabels):
         self.numFeatures = numFeatures
         self.numLabels = numLabels
-    def train(self, X, y, iters=100000):
+    def train(self, X, y):
         ds = ClassificationDataSet(self.numFeatures, nb_classes=self.numLabels)
-        for k in xrange(len(X)): 
-            print y[k]
-            ds.addSample(np.ravel(X[k]), y[k])
         ds.setField('input', X)
         ds.setField('target', y)
         self.net = buildNetwork(self.numFeatures, 100, self.numLabels, outclass=SoftmaxLayer, bias=True)
-        trainer = BackpropTrainer(self.net, ds)
-        trainer.trainUntilConvergence(verbose=True, validationProportion=0.15, maxEpochs=iters, continueEpochs=10)
-        trainer.trainEpochs(iters)
+        trainer = BackpropTrainer(self.net, ds, learningrate=0.12)
+        print 'Training now....'
+        trainer.trainUntilConvergence(validationProportion=0.1)
     def predict(self, x):
         return self.net.activate(x)
 
@@ -57,7 +54,8 @@ class AbstractLearningClient:
         self.restoreFromPersistance()
         self.initializeNeuralNetwork(architecture)
     def initializeNeuralNetwork(self, architecture):
-        self.net = NeuralNetwork(architecture[0], architecture[1])
+        if not self.net:
+            self.net = NeuralNetwork(architecture['inputWidth'], architecture['outputLength'])
         self.configureNeuralNetwork(False)
     def restoreFromPersistance(self):
         if not hasattr(self, 'persistanceManager'):
@@ -73,6 +71,7 @@ class AbstractLearningClient:
     def configureNeuralNetwork(self, shouldTrain):
         if shouldTrain:
             self.net.train(self.X, self.y)
+            self.persistanceManager.persistData(self.net, 'net')
     def streamInput(self, X, y):
         if not len(self.X):
             self.X = np.array(X)
@@ -84,13 +83,13 @@ class AbstractLearningClient:
             self.y = np.concatenate((self.y, y))
         self.configureNeuralNetwork(True)
         self.persistanceManager.persistData({'X': self.X, 'y': self.y}, 'trainingData')
-    def output(self, X):
-        return self.net.predict(X)
+    def output(self, x):
+        return self.net.predict(x)
 
 LEARNING_HANDLER_NAME_MOTION = 'LEARNING_HANDLER_NAME_MOTION'
 class MotionHandler:
     def __init__(self):
-        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, [1, 3])
+        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, {'inputWidth': 1, 'outputLength': 3})
     def motionDataToTrainingInput(self, data):
         length = len(data)
         X = [[]] * length

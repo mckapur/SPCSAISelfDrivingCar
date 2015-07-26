@@ -31,11 +31,9 @@ class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 		self.end_headers()
 		self.wfile.write("This is where the car driving Machine Learning and processing takes place (via POST requests).")
 	def do_POST(self):
-		if not hasattr(self, 'learningServer'):
-			self.learningServer = LearningServer()
 		body = json.loads(self.rfile.read(int(self.headers.getheader('Content-Length', 0))))
 		path = self.path
-		response = self.learningServer.handleRequest(path, body)
+		response = learningServer.handleRequest(path, body)
 		responseData = response['data']
 		error = response['error']
 		if error:
@@ -59,6 +57,9 @@ class LearningServer():
 			if body['type'] == DRIVING_CONTROL_TYPE_MOTION:
 				response = self.motionHandler.suggestedMotionResponseFromData(body['data'])
 		return {'data': response, 'error': error}
+
+if __name__ == "__main__":
+	learningServer = LearningServer()
 
 server_class = BaseHTTPServer.HTTPServer
 httpd = server_class((HOST_NAME, PORT_NUMBER), RequestHandler)
