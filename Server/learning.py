@@ -98,14 +98,24 @@ class MotionHandler:
         X = [[]] * length
         y = [[]] * length
         for i in range(length):
-            X[i] = [data[i]['frontDistanceToObject'], data[i]['rightDistanceToObject']/data[i]['leftDistanceToObject']]
+            X[i] = self.motionDataToPredictionInput(data[i])
             y[i] = [
                 data[i]['isAccelerating'],
                 data[i]['isBraking']
             ]
         return {'X': X, 'y': y}
     def motionDataToPredictionInput(self, data):
-        return [data['frontDistanceToObject'], data['rightDistanceToObject']/data['leftDistanceToObject']]
+        leftDistance = data['leftDistanceToObject']
+        rightDistance = data['rightDistanceToObject']
+        if (not leftDistance) or (not rightDistance):
+            rightOverLeft = 1
+        else:
+            rightOverLeft = leftDistance / rightDistance
+        if not data['frontDistanceToObject']:
+            frontDistance = 0
+        else:
+            frontDistance = 1/data['frontDistanceToObject']
+        return [frontDistance, rightOverLeft]
     def receivedNewMotionData(self, data):
         data = self.motionDataToTrainingInput(data)
         self.learningClient.streamInput(data['X'], data['y'])
@@ -134,7 +144,7 @@ class SteeringHandler:
         X = [[]] * length
         y = [[]] * length
         for i in range(length):
-            X[i] = [1/data[i]['frontDistanceToObject'], data[i]['rightDistanceToObject']/data[i]['leftDistanceToObject']]
+            X[i] = self.motionDataToPredictionInput(data[i])
             y[i] = [
                 data[i]['isTurningLeft'],
                 data[i]['isTurningRight'],
@@ -142,7 +152,17 @@ class SteeringHandler:
             ]
         return {'X': X, 'y': y}
     def steeringDataToPredictionInput(self, data):
-        return [1/data['frontDistanceToObject'], data['rightDistanceToObject']/data['leftDistanceToObject']]
+        leftDistance = data['leftDistanceToObject']
+        rightDistance = data['rightDistanceToObject']
+        if (not leftDistance) or (not rightDistance):
+            rightOverLeft = 1
+        else:
+            rightOverLeft = leftDistance / rightDistance
+        if not data['frontDistanceToObject']:
+            frontDistance = 0
+        else:
+            frontDistance = 1/data['frontDistanceToObject']
+        return [frontDistance, rightOverLeft]
     def receivedNewSteeringData(self, data):
         data = self.steeringDataToTrainingInput(data)
         self.learningClient.streamInput(data['X'], data['y'])
