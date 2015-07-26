@@ -16,7 +16,6 @@ PORT_NUMBER = 8000
 # API Routes
 SEND_DRIVING_DATA_ROUTE = '/sendDrivingData'
 GET_DRIVING_DATA_ROUTE = '/getDrivingData'
-WIPE_HISTORY_ROUTE = '/wipeHistory'
 
 # Driving Control Types
 DRIVING_CONTROL_TYPE_MOTION = 'motion'
@@ -35,7 +34,6 @@ class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 		if not hasattr(self, 'learningServer'):
 			self.learningServer = LearningServer()
 		body = json.loads(self.rfile.read(int(self.headers.getheader('Content-Length', 0))))
-		print body
 		path = self.path
 		response = self.learningServer.handleRequest(path, body)
 		responseData = response['data']
@@ -60,9 +58,6 @@ class LearningServer():
 		elif path == GET_DRIVING_DATA_ROUTE:
 			if body['type'] == DRIVING_CONTROL_TYPE_MOTION:
 				response = self.motionHandler.suggestedMotionResponseFromData(body['data'])
-		elif path == WIPE_HISTORY_ROUTE:
-			if body['type'] == DRIVING_CONTROL_TYPE_MOTION:
-				self.motionHandler.wipe()
 		return {'data': response, 'error': error}
 
 server_class = BaseHTTPServer.HTTPServer

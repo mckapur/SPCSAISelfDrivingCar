@@ -1,3 +1,6 @@
 [submodule "Server/numpy"]
 	path = Server/numpy
 	url = https://github.com/numpy/numpy.git
+[submodule "Server/pybrain"]
+	path = Server/pybrain
+	url = https://github.com/pybrain/pybrain.git
