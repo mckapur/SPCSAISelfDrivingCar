@@ -2,7 +2,7 @@
 This file, written by Rohan Kapur
 and Tanay Singhal, performs the
 learning and persistance of the
-SPCS self-driving AI car via Neural
+SPCS self-driving AI car using Neural
 Networks and other Machine Learning
 algorithms.
 """
@@ -27,7 +27,7 @@ class NeuralNetwork:
         self.net = buildNetwork(self.numFeatures, 100, self.numLabels, outclass=SoftmaxLayer, bias=True)
         trainer = BackpropTrainer(self.net, ds)
         print 'Training now....'
-        trainer.trainUntilConvergence(validationProportion=0.1, maxEpochs=1000)
+        trainer.trainUntilConvergence(validationProportion=0.1)
         print 'Done training'
     def predict(self, x):
         return self.net.activate(x)
@@ -144,7 +144,7 @@ class SteeringHandler:
         X = [[]] * length
         y = [[]] * length
         for i in range(length):
-            X[i] = self.motionDataToPredictionInput(data[i])
+            X[i] = self.steeringDataToPredictionInput(data[i])
             y[i] = [
                 data[i]['isTurningLeft'],
                 data[i]['isTurningRight'],

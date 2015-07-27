@@ -6,6 +6,7 @@ from the frontend to process and respond
 with a determinstic output.
 """
 
+from multiprocessing import Process
 import BaseHTTPServer
 import json
 import learning
@@ -52,16 +53,17 @@ class LearningServer():
 	def handleRequest(self, path, body):
 		response = {}
 		error = False
+		types = body['types']
 		if path == SEND_DRIVING_DATA_ROUTE:
-			if body['type'] == DRIVING_CONTROL_TYPE_MOTION:
+			if DRIVING_CONTROL_TYPE_MOTION in types:
 				self.motionHandler.receivedNewMotionData(body['data'])
-			elif body['type'] == DRIVING_CONTROL_TYPE_STEERING:
+			if DRIVING_CONTROL_TYPE_STEERING in types:
 				self.steeringHandler.receivedNewSteeringData(body['data'])
 		elif path == GET_DRIVING_DATA_ROUTE:
-			if body['type'] == DRIVING_CONTROL_TYPE_MOTION:
-				response = self.motionHandler.suggestedMotionResponseFromData(body['data'])
-			elif body['type'] == DRIVING_CONTROL_TYPE_STEERING:
-				response = self.steeringHandler.suggestedSteeringResponseFromData(body['data'])
+			if DRIVING_CONTROL_TYPE_MOTION in types:
+				response.update(self.motionHandler.suggestedMotionResponseFromData(body['data']))
+			if DRIVING_CONTROL_TYPE_STEERING in types:
+				response.update(self.steeringHandler.suggestedSteeringResponseFromData(body['data']))
 		return {'data': response, 'error': error}
 
 if __name__ == "__main__":
