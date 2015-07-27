@@ -105,17 +105,7 @@ class MotionHandler:
             ]
         return {'X': X, 'y': y}
     def motionDataToPredictionInput(self, data):
-        leftDistance = data['leftDistanceToObject']
-        rightDistance = data['rightDistanceToObject']
-        if (not leftDistance) or (not rightDistance):
-            rightOverLeft = 1
-        else:
-            rightOverLeft = leftDistance / rightDistance
-        if not data['frontDistanceToObject']:
-            frontDistance = 0
-        else:
-            frontDistance = 1/data['frontDistanceToObject']
-        return [frontDistance, rightOverLeft]
+        return [data['scaledForward'], data['scaledLeftRightRatio']]
     def receivedNewMotionData(self, data):
         data = self.motionDataToTrainingInput(data)
         self.learningClient.streamInput(data['X'], data['y'])
@@ -152,17 +142,7 @@ class SteeringHandler:
             ]
         return {'X': X, 'y': y}
     def steeringDataToPredictionInput(self, data):
-        leftDistance = data['leftDistanceToObject']
-        rightDistance = data['rightDistanceToObject']
-        if (not leftDistance) or (not rightDistance):
-            rightOverLeft = 1
-        else:
-            rightOverLeft = leftDistance / rightDistance
-        if not data['frontDistanceToObject']:
-            frontDistance = 0
-        else:
-            frontDistance = 1/data['frontDistanceToObject']
-        return [frontDistance, rightOverLeft]
+        return [data['scaledForward'], data['scaledLeftRightRatio']]
     def receivedNewSteeringData(self, data):
         data = self.steeringDataToTrainingInput(data)
         self.learningClient.streamInput(data['X'], data['y'])
