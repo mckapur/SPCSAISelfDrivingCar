@@ -25,10 +25,12 @@ class NeuralNetwork:
         ds.setField('input', X)
         ds.setField('target', y)
         self.net = buildNetwork(self.numFeatures, 100, self.numLabels, outclass=SoftmaxLayer, bias=True)
-        trainer = BackpropTrainer(self.net, ds)
+        trainer = BackpropTrainer(self.net, ds, learningrate=0.2)
         print 'Training now....'
-        trainer.trainUntilConvergence(validationProportion=0.1)
-        print 'Done training'
+        trainer.trainUntilConvergence(validationProportion=0.1, verbose=True)
+        print '\r'
+        print 'Done training\r'
+        print '=======================================================================================\r'
     def predict(self, x):
         return self.net.activate(x)
 
