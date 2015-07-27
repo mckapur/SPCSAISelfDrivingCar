@@ -15,6 +15,7 @@ from pybrain.tools.shortcuts     import buildNetwork
 from pybrain.supervised.trainers import BackpropTrainer
 from pybrain.structure.modules   import SoftmaxLayer
 import numpy as np
+import datetime
 
 class NeuralNetwork:
     def __init__(self, numFeatures, numLabels):
@@ -24,12 +25,15 @@ class NeuralNetwork:
         ds = ClassificationDataSet(self.numFeatures, nb_classes=self.numLabels)
         ds.setField('input', X)
         ds.setField('target', y)
-        self.net = buildNetwork(self.numFeatures, 100, self.numLabels, outclass=SoftmaxLayer, bias=True)
-        trainer = BackpropTrainer(self.net, ds, learningrate=0.2)
-        print 'Training now....'
-        trainer.trainUntilConvergence(validationProportion=0.1, verbose=True)
-        print '\r'
-        print 'Done training\r'
+        self.net = buildNetwork(self.numFeatures, len(y), self.numLabels, outclass=SigmoidLayer, bias=True)
+        trainer = BackpropTrainer(self.net, ds, learningrate=0.05)
+        print 'Training now....\r'
+        a = datetime.datetime.now()
+        trainer.trainUntilConvergence(validationProportion=0.05, verbose=True)
+        datetime.timedelta(0, 8, 562000)
+        b = datetime.datetime.now() - a
+        timeDiff = divmod(b.days * 86400 + b.seconds, 60)
+        print 'DONE TRAINING. TOOK %smin %ssec\r', timeDiff[0], timeDiff[1]
         print '=======================================================================================\r'
     def predict(self, x):
         return self.net.activate(x)
@@ -94,7 +98,7 @@ class AbstractLearningClient:
 LEARNING_HANDLER_NAME_MOTION = 'LEARNING_HANDLER_NAME_MOTION'
 class MotionHandler:
     def __init__(self):
-        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, {'inputWidth': 2, 'outputLength': 2})
+        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, {'inputWidth': 3, 'outputLength': 2})
     def motionDataToTrainingInput(self, data):
         length = len(data)
         X = [[]] * length
@@ -107,7 +111,8 @@ class MotionHandler:
             ]
         return {'X': X, 'y': y}
     def motionDataToPredictionInput(self, data):
-        return [data['scaledForward'], data['scaledLeftRightRatio']]
+        print "Motion training instances: %s", len(self.learningClient.y)
+        return [data['scaledForward'], data['scaledLeftRightRatio'], data['scaledSpeed']]
     def receivedNewMotionData(self, data):
         data = self.motionDataToTrainingInput(data)
         self.learningClient.streamInput(data['X'], data['y'])
@@ -119,8 +124,10 @@ class MotionHandler:
                 responseType = 'shouldAccelerate'
             elif i == 1:
                 responseType = 'shouldBrake'
-            if np.amax(output) == output[i]:
-                response[responseType] = 1
+            if np.amax(output) == output[i] and not outputAchieved:
+                    response[responseType] = 1
+                    if responseType == 'shouldBrake':
+                        outputAchieved = True
             else:
                 response[responseType] = 0
         return response
@@ -130,7 +137,7 @@ class MotionHandler:
 LEARNING_HANDLER_NAME_STEERING = 'LEARNING_HANDLER_NAME_STEERING'
 class SteeringHandler:
     def __init__(self):
-        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_STEERING, {'inputWidth': 2, 'outputLength': 3})
+        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_STEERING, {'inputWidth': 3, 'outputLength': 3})
     def steeringDataToTrainingInput(self, data):
         length = len(data)
         X = [[]] * length
@@ -144,13 +151,15 @@ class SteeringHandler:
             ]
         return {'X': X, 'y': y}
     def steeringDataToPredictionInput(self, data):
-        return [data['scaledForward'], data['scaledLeftRightRatio']]
+        print "Steering training instances: %s", len(self.learningClient.y)
+        return [data['scaledForward'], data['scaledLeftRightRatio'], data['scaledSpeed']]
     def receivedNewSteeringData(self, data):
         data = self.steeringDataToTrainingInput(data)
         self.learningClient.streamInput(data['X'], data['y'])
     def suggestedSteeringResponseFromData(self, data):
         output = self.learningClient.output(self.steeringDataToPredictionInput(data))
         response = {}
+        outputAchieved = False
         for i in range(len(output)):
             if i == 0:
                 responseType = 'shouldTurnLeft'
@@ -158,8 +167,10 @@ class SteeringHandler:
                 responseType = 'shouldTurnRight'
             elif i == 2:
                 responseType = 'shouldKeepStraight'
-            if np.amax(output) == output[i]:
-                response[responseType] = 1
+            if np.amax(output) == output[i] and not outputAchieved:
+                    response[responseType] = 1
+                    if responseType == 'shouldKeepStraight':
+                        outputAchieved = True
             else:
                 response[responseType] = 0
         return response
