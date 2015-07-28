@@ -13,7 +13,7 @@ from pybrain.datasets            import ClassificationDataSet
 from pybrain.utilities           import percentError
 from pybrain.tools.shortcuts     import buildNetwork
 from pybrain.supervised.trainers import BackpropTrainer
-from pybrain.structure.modules   import SoftmaxLayer
+from pybrain.structure.modules   import SigmoidLayer
 import numpy as np
 import datetime
 
@@ -26,14 +26,14 @@ class NeuralNetwork:
         ds.setField('input', X)
         ds.setField('target', y)
         self.net = buildNetwork(self.numFeatures, len(y), self.numLabels, outclass=SigmoidLayer, bias=True)
-        trainer = BackpropTrainer(self.net, ds, learningrate=0.05)
+        trainer = BackpropTrainer(self.net, ds, learningrate=0.3)
         print 'Training now....\r'
         a = datetime.datetime.now()
         trainer.trainUntilConvergence(validationProportion=0.05, verbose=True)
         datetime.timedelta(0, 8, 562000)
         b = datetime.datetime.now() - a
         timeDiff = divmod(b.days * 86400 + b.seconds, 60)
-        print 'DONE TRAINING. TOOK %smin %ssec\r', timeDiff[0], timeDiff[1]
+        print 'DONE TRAINING. TOOK %s min %s sec\r' % (timeDiff[0], timeDiff[1])
         print '=======================================================================================\r'
     def predict(self, x):
         return self.net.activate(x)
@@ -111,7 +111,6 @@ class MotionHandler:
             ]
         return {'X': X, 'y': y}
     def motionDataToPredictionInput(self, data):
-        print "Motion training instances: %s", len(self.learningClient.y)
         return [data['scaledForward'], data['scaledLeftRightRatio'], data['scaledSpeed']]
     def receivedNewMotionData(self, data):
         data = self.motionDataToTrainingInput(data)
@@ -119,6 +118,7 @@ class MotionHandler:
     def suggestedMotionResponseFromData(self, data):
         output = self.learningClient.output(self.motionDataToPredictionInput(data))
         response = {}
+        outputAchieved = False
         for i in range(len(output)):
             if i == 0:
                 responseType = 'shouldAccelerate'
@@ -151,7 +151,6 @@ class SteeringHandler:
             ]
         return {'X': X, 'y': y}
     def steeringDataToPredictionInput(self, data):
-        print "Steering training instances: %s", len(self.learningClient.y)
         return [data['scaledForward'], data['scaledLeftRightRatio'], data['scaledSpeed']]
     def receivedNewSteeringData(self, data):
         data = self.steeringDataToTrainingInput(data)
