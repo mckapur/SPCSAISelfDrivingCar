@@ -14,6 +14,7 @@ from pybrain.utilities           import percentError
 from pybrain.tools.shortcuts     import buildNetwork
 from pybrain.supervised.trainers import BackpropTrainer
 from pybrain.structure.modules   import SigmoidLayer
+from arac.pybrainbridge import _FeedForwardNetwork, _RecurrentNetwork
 import numpy as np
 import datetime
 
@@ -25,14 +26,14 @@ class NeuralNetwork:
         ds = ClassificationDataSet(self.numFeatures, nb_classes=self.numLabels)
         ds.setField('input', X)
         ds.setField('target', y)
-        self.net = buildNetwork(self.numFeatures, len(y), self.numLabels, outclass=SigmoidLayer, bias=True)
-        trainer = BackpropTrainer(self.net, ds, learningrate=0.3)
+        self.net = buildNetwork(self.numFeatures, len(y), self.numLabels, outclass=SigmoidLayer, bias=True, fast=True)
+        trainer = BackpropTrainer(self.net, ds, learningrate=0.03, momentum=0.1)
         print 'Training now....\r'
-        a = datetime.datetime.now()
-        trainer.trainUntilConvergence(validationProportion=0.05, verbose=True)
+        startDate = datetime.datetime.now()
+        trainer.trainEpochs(epochs=1000, verbose=True)
         datetime.timedelta(0, 8, 562000)
-        b = datetime.datetime.now() - a
-        timeDiff = divmod(b.days * 86400 + b.seconds, 60)
+        dateDiff = datetime.datetime.now() - a
+        timeDiff = divmod(dateDiff.days*86400 + dateDiff.seconds, 60)
         print 'DONE TRAINING. TOOK %s min %s sec\r' % (timeDiff[0], timeDiff[1])
         print '=======================================================================================\r'
     def predict(self, x):
@@ -98,7 +99,7 @@ class AbstractLearningClient:
 LEARNING_HANDLER_NAME_MOTION = 'LEARNING_HANDLER_NAME_MOTION'
 class MotionHandler:
     def __init__(self):
-        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, {'inputWidth': 3, 'outputLength': 2})
+        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, {'inputWidth': 1, 'outputLength': 2})
     def motionDataToTrainingInput(self, data):
         length = len(data)
         X = [[]] * length
@@ -106,8 +107,7 @@ class MotionHandler:
         for i in range(length):
             X[i] = self.motionDataToPredictionInput(data[i])
             y[i] = [
-                data[i]['isAccelerating'],
-                data[i]['isBraking']
+                data[i]['isAccelerating']
             ]
         return {'X': X, 'y': y}
     def motionDataToPredictionInput(self, data):
@@ -118,16 +118,11 @@ class MotionHandler:
     def suggestedMotionResponseFromData(self, data):
         output = self.learningClient.output(self.motionDataToPredictionInput(data))
         response = {}
-        outputAchieved = False
         for i in range(len(output)):
             if i == 0:
                 responseType = 'shouldAccelerate'
-            elif i == 1:
-                responseType = 'shouldBrake'
             if np.amax(output) == output[i] and not outputAchieved:
                     response[responseType] = 1
-                    if responseType == 'shouldBrake':
-                        outputAchieved = True
             else:
                 response[responseType] = 0
         return response
