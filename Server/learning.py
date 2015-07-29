@@ -111,7 +111,7 @@ class AbstractLearningClient:
 LEARNING_HANDLER_NAME_MOTION = 'LEARNING_HANDLER_NAME_MOTION'
 class MotionHandler:
     def __init__(self):
-        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, {'inputWidth': 2, 'outputLength': 1})
+        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, {'inputWidth': 3, 'outputLength': 1})
         self.printAccuracy()
     def printAccuracy(self):
         errorHits = 0.0
@@ -134,7 +134,7 @@ class MotionHandler:
             ]
         return {'X': X, 'y': y}
     def motionDataToPredictionInput(self, data):
-        return [data['scaledForward'], data['scaledLeftRightRatio']]
+        return [data['scaledForward'], data['scaledLeftRightRatio'], data['scaledSpeed']]
     def receivedNewMotionData(self, data):
         data = self.motionDataToTrainingInput(data)
         self.learningClient.streamInput(data['X'], data['y'])
@@ -148,7 +148,7 @@ class MotionHandler:
 LEARNING_HANDLER_NAME_STEERING = 'LEARNING_HANDLER_NAME_STEERING'
 class SteeringHandler:
     def __init__(self):
-        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_STEERING, {'inputWidth': 2, 'outputLength': 3})
+        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_STEERING, {'inputWidth': 3, 'outputLength': 3})
         self.printAccuracy()
     def printAccuracy(self):
         errorHits = 0.0
@@ -173,7 +173,7 @@ class SteeringHandler:
             ]
         return {'X': X, 'y': y}
     def steeringDataToPredictionInput(self, data):
-        return [data['scaledForward'], data['scaledLeftRightRatio']]
+        return [data['scaledForward'], data['scaledLeftRightRatio'], data['scaledSpeed']]
     def receivedNewSteeringData(self, data):
         data = self.steeringDataToTrainingInput(data)
         self.learningClient.streamInput(data['X'], data['y'])

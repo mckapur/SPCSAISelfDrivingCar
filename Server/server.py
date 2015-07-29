@@ -11,6 +11,9 @@ import BaseHTTPServer
 import json
 import learning
 
+import logging
+import httplib
+
 HOST_NAME = 'localhost'
 PORT_NUMBER = 8000
 
@@ -21,6 +24,10 @@ GET_DRIVING_DATA_ROUTE = '/getDrivingData'
 # Driving Control Types
 DRIVING_CONTROL_TYPE_MOTION = 'motion'
 DRIVING_CONTROL_TYPE_STEERING = 'steering'
+
+def configureLogging():
+	urllib3_logger = logging.getLogger('urllib3')
+	urllib3_logger.setLevel(logging.CRITICAL)
 
 class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 	def do_HEAD(self):
@@ -68,6 +75,7 @@ class LearningServer():
 
 if __name__ == "__main__":
 	learningServer = LearningServer()
+	configureLogging()
 
 server_class = BaseHTTPServer.HTTPServer
 httpd = server_class((HOST_NAME, PORT_NUMBER), RequestHandler)
