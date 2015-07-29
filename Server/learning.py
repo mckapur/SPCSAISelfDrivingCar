@@ -15,6 +15,9 @@ from pybrain.tools.shortcuts     import buildNetwork
 from pybrain.supervised.trainers import BackpropTrainer
 from pybrain.structure.modules   import SigmoidLayer
 from pybrain.structure.modules   import SoftmaxLayer
+from pybrain.tools.shortcuts import buildNetwork
+from pybrain.tools.customxml.networkwriter import NetworkWriter
+from pybrain.tools.customxml.networkreader import NetworkReader
 import numpy as np
 import datetime
 
@@ -49,14 +52,20 @@ class PersistanceManager:
     def relPathFromFilename(self, filename):
         return DATA_DUMP_DIRECTORY + "_" + filename + "_" + self.namespace
     def persistData(self, data, name):
-        with open(self.relPathFromFilename(name), 'wb') as f:
-            pickle.dump(data, f)
+        if name == NEURAL_NET_DUMP_NAME:
+            NetworkWriter.writeToFile(data, self.relPathFromFilename(name))
+        else:
+            with open(self.relPathFromFilename(name), 'wb') as f:
+                pickle.dump(data, f)
     def getPersistedData(self, name):
         pathToData = self.relPathFromFilename(name)
         if os.path.isfile(pathToData):
-            with open(pathToData, 'rb') as f:
-                data = pickle.load(f)
-                return data
+            if name == NEURAL_NET_DUMP_NAME:
+                return NetworkReader.readFrom(self.relPathFromFilename(name))
+            else:
+                with open(pathToData, 'rb') as f:
+                    data = pickle.load(f)
+                    return data
         return None
 
 TRAINING_DATA_DUMP_NAME = "training_data"
@@ -102,13 +111,18 @@ class AbstractLearningClient:
 LEARNING_HANDLER_NAME_MOTION = 'LEARNING_HANDLER_NAME_MOTION'
 class MotionHandler:
     def __init__(self):
-        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, {'inputWidth': 3, 'outputLength': 1})
+        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, {'inputWidth': 2, 'outputLength': 1})
+        self.printAccuracy()
+    def printAccuracy(self):
         errorHits = 0.0
         for i in range(len(self.learningClient.y)):
-            if not np.around(self.learningClient.output(self.learningClient.X[i])[0]) == self.learningClient.y[i][0]:
+            if not np.around(self.learningClient.output(self.learningClient.X[i])[0]) == np.around(self.learningClient.y[i][0]):
                 errorHits += 1
-        percentageErr = errorHits/len(self.learningClient.y)*100
-        print "Percentage error: " + str(percentageErr) + "%"
+        if len(self.learningClient.y):
+            percentageErr = errorHits/len(self.learningClient.y)*100
+            return "Motion error: " + str(percentageErr) + "%"
+        else:
+            return "Motion error indeterminate"
     def motionDataToTrainingInput(self, data):
         length = len(data)
         X = [[]] * length
@@ -120,7 +134,7 @@ class MotionHandler:
             ]
         return {'X': X, 'y': y}
     def motionDataToPredictionInput(self, data):
-        return [data['scaledForward'], data['scaledLeftRightRatio'], data['scaledSpeed']]
+        return [data['scaledForward'], data['scaledLeftRightRatio']]
     def receivedNewMotionData(self, data):
         data = self.motionDataToTrainingInput(data)
         self.learningClient.streamInput(data['X'], data['y'])
@@ -134,7 +148,18 @@ class MotionHandler:
 LEARNING_HANDLER_NAME_STEERING = 'LEARNING_HANDLER_NAME_STEERING'
 class SteeringHandler:
     def __init__(self):
-        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_STEERING, {'inputWidth': 3, 'outputLength': 3})
+        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_STEERING, {'inputWidth': 2, 'outputLength': 3})
+        self.printAccuracy()
+    def printAccuracy(self):
+        errorHits = 0.0
+        for i in range(len(self.learningClient.y)):
+            if not np.around(np.amax(self.learningClient.output(self.learningClient.X[i]))) == np.around(np.amax(self.learningClient.y[i])):
+                errorHits += 1
+        if len(self.learningClient.y):
+            percentageErr = errorHits/len(self.learningClient.y)*100
+            print "Percentage error: " + str(percentageErr) + "%"
+        else:
+            return "Motion error indeterminate"
     def steeringDataToTrainingInput(self, data):
         length = len(data)
         X = [[]] * length
@@ -148,7 +173,7 @@ class SteeringHandler:
             ]
         return {'X': X, 'y': y}
     def steeringDataToPredictionInput(self, data):
-        return [data['scaledForward'], data['scaledLeftRightRatio'], data['scaledSpeed']]
+        return [data['scaledForward'], data['scaledLeftRightRatio']]
     def receivedNewSteeringData(self, data):
         data = self.steeringDataToTrainingInput(data)
         self.learningClient.streamInput(data['X'], data['y'])

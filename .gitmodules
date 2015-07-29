@@ -4,3 +4,6 @@
 [submodule "Server/pybrain"]
 	path = Server/pybrain
 	url = https://github.com/pybrain/pybrain.git
+[submodule "Server/arac"]
+	path = Server/arac
+	url = git://github.com/bayerj/arac.git
