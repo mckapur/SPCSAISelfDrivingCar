@@ -14,7 +14,7 @@ from pybrain.utilities           import percentError
 from pybrain.tools.shortcuts     import buildNetwork
 from pybrain.supervised.trainers import BackpropTrainer
 from pybrain.structure.modules   import SigmoidLayer
-from arac.pybrainbridge import _FeedForwardNetwork, _RecurrentNetwork
+from pybrain.structure.modules   import SoftmaxLayer
 import numpy as np
 import datetime
 
@@ -23,16 +23,19 @@ class NeuralNetwork:
         self.numFeatures = numFeatures
         self.numLabels = numLabels
     def train(self, X, y):
-        ds = ClassificationDataSet(self.numFeatures, nb_classes=self.numLabels)
+        ds = ClassificationDataSet(self.numFeatures, self.numLabels, nb_classes=self.numLabels)
         ds.setField('input', X)
         ds.setField('target', y)
-        self.net = buildNetwork(self.numFeatures, len(y), self.numLabels, outclass=SigmoidLayer, bias=True, fast=True)
+        outclass = SoftmaxLayer
+        if self.numLabels == 1:
+            outclass = SigmoidLayer
+        self.net = buildNetwork(self.numFeatures, len(y), self.numLabels, outclass=outclass, bias=True) 
         trainer = BackpropTrainer(self.net, ds, learningrate=0.03, momentum=0.1)
         print 'Training now....\r'
         startDate = datetime.datetime.now()
-        trainer.trainEpochs(epochs=1000, verbose=True)
+        trainer.trainUntilConvergence(verbose=True)
         datetime.timedelta(0, 8, 562000)
-        dateDiff = datetime.datetime.now() - a
+        dateDiff = datetime.datetime.now() - startDate
         timeDiff = divmod(dateDiff.days*86400 + dateDiff.seconds, 60)
         print 'DONE TRAINING. TOOK %s min %s sec\r' % (timeDiff[0], timeDiff[1])
         print '=======================================================================================\r'
@@ -91,15 +94,21 @@ class AbstractLearningClient:
             self.y = np.array(y)
         else:
             self.y = np.concatenate((self.y, y))
-        self.configureNeuralNetwork(True)
         self.persistanceManager.persistData({'X': self.X, 'y': self.y}, TRAINING_DATA_DUMP_NAME)
+        self.configureNeuralNetwork(True)
     def output(self, x):
         return self.net.predict(x)
 
 LEARNING_HANDLER_NAME_MOTION = 'LEARNING_HANDLER_NAME_MOTION'
 class MotionHandler:
     def __init__(self):
-        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, {'inputWidth': 1, 'outputLength': 2})
+        self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, {'inputWidth': 3, 'outputLength': 1})
+        errorHits = 0.0
+        for i in range(len(self.learningClient.y)):
+            if not np.around(self.learningClient.output(self.learningClient.X[i])[0]) == self.learningClient.y[i][0]:
+                errorHits += 1
+        percentageErr = errorHits/len(self.learningClient.y)*100
+        print "Percentage error: " + str(percentageErr) + "%"
     def motionDataToTrainingInput(self, data):
         length = len(data)
         X = [[]] * length
@@ -117,14 +126,7 @@ class MotionHandler:
         self.learningClient.streamInput(data['X'], data['y'])
     def suggestedMotionResponseFromData(self, data):
         output = self.learningClient.output(self.motionDataToPredictionInput(data))
-        response = {}
-        for i in range(len(output)):
-            if i == 0:
-                responseType = 'shouldAccelerate'
-            if np.amax(output) == output[i] and not outputAchieved:
-                    response[responseType] = 1
-            else:
-                response[responseType] = 0
+        response = {'shouldAccelerate': np.around(output[0])}
         return response
     # def reinforceMotionData(self, data):
     # def penalizeMotionData(self, data):
@@ -153,7 +155,6 @@ class SteeringHandler:
     def suggestedSteeringResponseFromData(self, data):
         output = self.learningClient.output(self.steeringDataToPredictionInput(data))
         response = {}
-        outputAchieved = False
         for i in range(len(output)):
             if i == 0:
                 responseType = 'shouldTurnLeft'
@@ -161,10 +162,8 @@ class SteeringHandler:
                 responseType = 'shouldTurnRight'
             elif i == 2:
                 responseType = 'shouldKeepStraight'
-            if np.amax(output) == output[i] and not outputAchieved:
-                    response[responseType] = 1
-                    if responseType == 'shouldKeepStraight':
-                        outputAchieved = True
+            if np.argmax(output) == i:
+                response[responseType] = 1
             else:
                 response[responseType] = 0
         return response
