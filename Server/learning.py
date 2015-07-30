@@ -32,41 +32,40 @@ class NeuralNetwork:
         outclass = SoftmaxLayer
         if self.numLabels == 1:
             outclass = SigmoidLayer
-        self.net = buildNetwork(self.numFeatures, len(y), self.numLabels, outclass=outclass, bias=True) 
-        trainer = BackpropTrainer(self.net, ds, learningrate=0.03, momentum=0.1)
-        print 'Training now....\r'
+        self.net = buildNetwork(self.numFeatures, len(y), self.numLabels, outclass=outclass, bias=True)
+        trainer = BackpropTrainer(self.net, ds, learningrate=0.3, momentum=0.1)
+        print 'Training now.... on ' + str(len(y)) + ' training examples'
         startDate = datetime.datetime.now()
-        trainer.trainUntilConvergence(verbose=True)
+        trainer.trainUntilConvergence(verbose=True, validationProportion=0.05)
         datetime.timedelta(0, 8, 562000)
         dateDiff = datetime.datetime.now() - startDate
         timeDiff = divmod(dateDiff.days*86400 + dateDiff.seconds, 60)
         print 'DONE TRAINING. TOOK %s min %s sec\r' % (timeDiff[0], timeDiff[1])
         print '=======================================================================================\r'
     def predict(self, x):
-        return self.net.activate(x)
+        if hasattr(self, 'net'):
+            return self.net.activate(x)
 
 DATA_DUMP_DIRECTORY = "data_dump"
+DATA_DUMP_NN_EXT = "_PYBRAIN"
 class PersistanceManager:
     def __init__(self, namespace):
         self.namespace = namespace
     def relPathFromFilename(self, filename):
         return DATA_DUMP_DIRECTORY + "_" + filename + "_" + self.namespace
     def persistData(self, data, name):
+        with open(self.relPathFromFilename(name), 'wb') as f:
+            pickle.dump(data, f)
         if name == NEURAL_NET_DUMP_NAME:
-            NetworkWriter.writeToFile(data, self.relPathFromFilename(name))
-        else:
-            with open(self.relPathFromFilename(name), 'wb') as f:
-                pickle.dump(data, f)
+            NetworkWriter.writeToFile(data.net, self.relPathFromFilename(name + DATA_DUMP_NN_EXT))            
     def getPersistedData(self, name):
         pathToData = self.relPathFromFilename(name)
         if os.path.isfile(pathToData):
+            with open(pathToData, 'rb') as f:
+                data = pickle.load(f)
             if name == NEURAL_NET_DUMP_NAME:
-                return NetworkReader.readFrom(self.relPathFromFilename(name))
-            else:
-                with open(pathToData, 'rb') as f:
-                    data = pickle.load(f)
-                    return data
-        return None
+                data.net = NetworkReader.readFrom(self.relPathFromFilename(name + DATA_DUMP_NN_EXT))
+            return data
 
 TRAINING_DATA_DUMP_NAME = "training_data"
 NEURAL_NET_DUMP_NAME = "neural_net"
@@ -76,13 +75,15 @@ class AbstractLearningClient:
         self.restoreFromPersistance()
         self.initializeNeuralNetwork(architecture)
     def initializeNeuralNetwork(self, architecture):
-        if not self.net:
+        if not hasattr(self, 'net'):
             self.net = NeuralNetwork(architecture['inputWidth'], architecture['outputLength'])
         self.configureNeuralNetwork(False)
     def restoreFromPersistance(self):
         if not hasattr(self, 'persistanceManager'):
             self.persistanceManager = PersistanceManager(self.name)
-        self.net = self.persistanceManager.getPersistedData(NEURAL_NET_DUMP_NAME)
+        net = self.persistanceManager.getPersistedData(NEURAL_NET_DUMP_NAME)
+        if net:
+            self.net = net
         trainingData = self.persistanceManager.getPersistedData(TRAINING_DATA_DUMP_NAME)
         if trainingData:
             self.X = trainingData['X']
@@ -90,6 +91,7 @@ class AbstractLearningClient:
         else:
             self.X = []
             self.y = []
+
     def configureNeuralNetwork(self, shouldTrain):
         if shouldTrain:
             self.net.train(self.X, self.y)
@@ -112,17 +114,18 @@ LEARNING_HANDLER_NAME_MOTION = 'LEARNING_HANDLER_NAME_MOTION'
 class MotionHandler:
     def __init__(self):
         self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, {'inputWidth': 3, 'outputLength': 1})
-        self.printAccuracy()
+        if hasattr(self.learningClient.net, 'net'):
+            self.printAccuracy()
     def printAccuracy(self):
         errorHits = 0.0
-        for i in range(len(self.learningClient.y)):
-            if not np.around(self.learningClient.output(self.learningClient.X[i])[0]) == np.around(self.learningClient.y[i][0]):
-                errorHits += 1
         if len(self.learningClient.y):
-            percentageErr = errorHits/len(self.learningClient.y)*100
-            return "Motion error: " + str(percentageErr) + "%"
-        else:
-            return "Motion error indeterminate"
+            for i in range(len(self.learningClient.y)):
+                if not np.around(self.learningClient.output(self.learningClient.X[i])[0]) == np.around(self.learningClient.y[i][0]):
+                    errorHits += 1
+            if len(self.learningClient.y):
+                percentageErr = errorHits/len(self.learningClient.y)*100
+                return "Motion error: " + str(percentageErr) + "%"
+        return "Motion error indeterminate"
     def motionDataToTrainingInput(self, data):
         length = len(data)
         X = [[]] * length
@@ -149,17 +152,19 @@ LEARNING_HANDLER_NAME_STEERING = 'LEARNING_HANDLER_NAME_STEERING'
 class SteeringHandler:
     def __init__(self):
         self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_STEERING, {'inputWidth': 3, 'outputLength': 3})
-        self.printAccuracy()
+        if hasattr(self.learningClient.net, 'net'):
+            self.printAccuracy()
     def printAccuracy(self):
         errorHits = 0.0
-        for i in range(len(self.learningClient.y)):
-            if not np.around(np.amax(self.learningClient.output(self.learningClient.X[i]))) == np.around(np.amax(self.learningClient.y[i])):
-                errorHits += 1
         if len(self.learningClient.y):
-            percentageErr = errorHits/len(self.learningClient.y)*100
-            print "Percentage error: " + str(percentageErr) + "%"
+            for i in range(len(self.learningClient.y)):
+                if not np.around(np.amax(self.learningClient.output(self.learningClient.X[i]))) == np.around(np.amax(self.learningClient.y[i])):
+                    errorHits += 1
+            if len(self.learningClient.y):
+                percentageErr = errorHits/len(self.learningClient.y)*100
+                print "Steering error: " + str(percentageErr) + "%"
         else:
-            return "Motion error indeterminate"
+            return "Steering error indeterminate"
     def steeringDataToTrainingInput(self, data):
         length = len(data)
         X = [[]] * length

@@ -25,10 +25,6 @@ GET_DRIVING_DATA_ROUTE = '/getDrivingData'
 DRIVING_CONTROL_TYPE_MOTION = 'motion'
 DRIVING_CONTROL_TYPE_STEERING = 'steering'
 
-def configureLogging():
-	urllib3_logger = logging.getLogger('urllib3')
-	urllib3_logger.setLevel(logging.CRITICAL)
-
 class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 	def do_HEAD(self):
 		self.send_response(200)
@@ -75,7 +71,6 @@ class LearningServer():
 
 if __name__ == "__main__":
 	learningServer = LearningServer()
-	configureLogging()
 
 server_class = BaseHTTPServer.HTTPServer
 httpd = server_class((HOST_NAME, PORT_NUMBER), RequestHandler)
