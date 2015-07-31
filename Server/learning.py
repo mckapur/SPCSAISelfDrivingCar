@@ -29,11 +29,10 @@ class NeuralNetwork:
         ds = ClassificationDataSet(self.numFeatures, self.numLabels, nb_classes=self.numLabels)
         ds.setField('input', X)
         ds.setField('target', y)
-        outclass = SoftmaxLayer
-        if self.numLabels == 1:
-            outclass = SigmoidLayer
-        self.net = buildNetwork(self.numFeatures, len(y), self.numLabels, outclass=outclass, bias=True)
-        trainer = BackpropTrainer(self.net, ds, learningrate=0.3, momentum=0.1)
+        self.net = buildNetwork(self.numFeatures, len(y), self.numLabels, outclass=SigmoidLayer, bias=True)
+        print X
+        print y
+        trainer = BackpropTrainer(self.net, ds, learningrate=0.12)
         print 'Training now.... on ' + str(len(y)) + ' training examples'
         startDate = datetime.datetime.now()
         trainer.trainUntilConvergence(verbose=True, validationProportion=0.05)
@@ -116,6 +115,7 @@ class MotionHandler:
         self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_MOTION, {'inputWidth': 3, 'outputLength': 1})
         if hasattr(self.learningClient.net, 'net'):
             self.printAccuracy()
+        self.learningClient.configureNeuralNetwork(True)
     def printAccuracy(self):
         errorHits = 0.0
         if len(self.learningClient.y):
@@ -124,8 +124,7 @@ class MotionHandler:
                     errorHits += 1
             if len(self.learningClient.y):
                 percentageErr = errorHits/len(self.learningClient.y)*100
-                return "Motion error: " + str(percentageErr) + "%"
-        return "Motion error indeterminate"
+                print "Motion error: " + str(percentageErr) + "%"
     def motionDataToTrainingInput(self, data):
         length = len(data)
         X = [[]] * length
@@ -154,17 +153,16 @@ class SteeringHandler:
         self.learningClient = AbstractLearningClient(LEARNING_HANDLER_NAME_STEERING, {'inputWidth': 3, 'outputLength': 3})
         if hasattr(self.learningClient.net, 'net'):
             self.printAccuracy()
+        self.learningClient.configureNeuralNetwork(True)
     def printAccuracy(self):
         errorHits = 0.0
         if len(self.learningClient.y):
             for i in range(len(self.learningClient.y)):
-                if not np.around(np.amax(self.learningClient.output(self.learningClient.X[i]))) == np.around(np.amax(self.learningClient.y[i])):
+                if not np.argmax(self.learningClient.output(self.learningClient.X[i])) == np.argmax(self.learningClient.y[i]):
                     errorHits += 1
             if len(self.learningClient.y):
                 percentageErr = errorHits/len(self.learningClient.y)*100
                 print "Steering error: " + str(percentageErr) + "%"
-        else:
-            return "Steering error indeterminate"
     def steeringDataToTrainingInput(self, data):
         length = len(data)
         X = [[]] * length
