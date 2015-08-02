@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.Self Driving Car.CSharp", "UnityVS.Self Driving Car.CSharp.csproj", "{290BC954-E31D-1377-AD16-8EC1A9F80522}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.Self Driving Car.CSharp.Plugins", "UnityVS.Self Driving Car.CSharp.Plugins.csproj", "{7D4AF312-02F8-5ABF-538B-C2BD72D2B868}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.Self Driving Car.CSharp.Editor", "UnityVS.Self Driving Car.CSharp.Editor.csproj", "{157AC635-F58D-9542-BBD7-713A2FD2C28E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{290BC954-E31D-1377-AD16-8EC1A9F80522}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{290BC954-E31D-1377-AD16-8EC1A9F80522}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{290BC954-E31D-1377-AD16-8EC1A9F80522}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{290BC954-E31D-1377-AD16-8EC1A9F80522}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D4AF312-02F8-5ABF-538B-C2BD72D2B868}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D4AF312-02F8-5ABF-538B-C2BD72D2B868}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D4AF312-02F8-5ABF-538B-C2BD72D2B868}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D4AF312-02F8-5ABF-538B-C2BD72D2B868}.Release|Any CPU.Build.0 = Release|Any CPU
+		{157AC635-F58D-9542-BBD7-713A2FD2C28E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{157AC635-F58D-9542-BBD7-713A2FD2C28E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{157AC635-F58D-9542-BBD7-713A2FD2C28E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{157AC635-F58D-9542-BBD7-713A2FD2C28E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

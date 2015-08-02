@@ -1,0 +1,16 @@
+5.1.0f3:1.9.8.0
+/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll
+/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll
+/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll
+/Applications/Unity/Unity.app/Contents/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll
+/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll
+/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll
+/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll
+/Applications/Unity/Unity.app/Contents/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+/Applications/Unity/Unity.app/Contents/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+/Applications/Unity/Unity.app/Contents/PlaybackEngines/BlackBerryPlayer/UnityEditor.BB10.Extensions.dll
+/Applications/Unity/Unity.app/Contents/PlaybackEngines/STVPlayer/STVPlayer/UnityEditor.SamsungTV.Extensions.dll
+/Applications/Unity/Unity.app/Contents/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+/Applications/Unity/Unity.app/Contents/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
+/Applications/Unity/Unity.app/Contents/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+/Applications/Unity/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
