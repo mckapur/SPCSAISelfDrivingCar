@@ -13,7 +13,7 @@ public class MoveCar : MonoBehaviour {
 	public float maxSteeringAngle; // maximum steer angle the wheel can have
 
 	private Rigidbody rb;
-	private float maxSpeed = 100f; //*3.6
+	public float maxSpeed = 100f; //*3.6
 	//speed = velocity.magnitude
 	public static float mySpeed;
 	public static float scaledSpeed;
@@ -55,11 +55,9 @@ public class MoveCar : MonoBehaviour {
 
 	private SendData sendData;
 	private Sensors sensors;
+	//private SensorsNoWall sensors2;
 
 	private bool begunAccelerating;
-
-	private bool playedAwake = true;
-
 	public static bool shouldSendData;
 	
 	private bool crashed;
@@ -72,7 +70,8 @@ public class MoveCar : MonoBehaviour {
 		//crashText.text = "";
 
 		sendData = this.GetComponent<SendData>();
-		sensors = this.GetComponent<Sensors>();
+
+		sensors = this.GetComponent<Sensors> ();
 		
 		initialPosition = transform.position;
 		initialRotation = transform.rotation;
@@ -106,14 +105,13 @@ public class MoveCar : MonoBehaviour {
 			Debug.Log("We had crashed");
 			sensors.ClearList();
 		}
-
 		if (shouldSendData) {
 			Debug.Log ("Sending data..");
 			sendData.SendDataToServer ();
 			sensors.ClearList ();
 			shouldSendData = false;
 			Debug.Log("Quit");
-			Application.Quit();
+			Application.LoadLevel("Start");
 		}
 		else if (MoveCar.isControlledByAI) {
 			//Debug.Log ("started coroutine for getting data");
@@ -167,10 +165,6 @@ public class MoveCar : MonoBehaviour {
 			} 
 			//Converting AI output to game output
 			else {
-				/*else if(shouldAccelerate == 0 && shouldBrake == 0) {
-					Debug.Log("This should not happen");
-					shouldBrake = 1;
-				}*/
 				//Moving.. (back and forth)
 				if (shouldAccelerate == 1) {
 					isAccelerating = 1f;
@@ -201,7 +195,6 @@ public class MoveCar : MonoBehaviour {
 				//This will be changed when we have a neural network for turning
 			}
 
-
 			GetComponent<AudioSource> ().clip = movingCarSound;
 			//If we are moving too fast then set acceleration to 0
 			PlaySound ();
@@ -219,15 +212,12 @@ public class MoveCar : MonoBehaviour {
 			sensors.ClearList ();
 			StartCoroutine(RestartIn(1f));
 		} else {
-			//Do this only when button is pressed
-			/*sendData.SendDataToServer ();
-			sensors.ClearList();*/
 			finishText.text = "Finished";
 			StartCoroutine(LoadLevel("Finished", 1f));
 		}
 	}
 
-	private IEnumerator LoadLevel(string levelName, float waitTime) {
+	public IEnumerator LoadLevel(string levelName, float waitTime) {
 		yield return new WaitForSeconds (waitTime);
 		Application.LoadLevel (levelName);
 	}

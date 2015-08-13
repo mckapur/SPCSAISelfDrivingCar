@@ -10,18 +10,19 @@ public class SendData : MonoBehaviour {
 	public static float addDataDelay = 0.2f;
 
 	private Sensors sensor;
-	private MoveCar moveCar;
 
 	void Awake() {
 		//StartCoroutine (SendAndReceiveData())
 		sensor = this.GetComponent<Sensors> ();
-		moveCar = this.GetComponent<MoveCar> ();
 	}
 
 	//This is only a one time thing
 	public void SendDataToServer () {
 		//If human is controlling, we want to send human's data for training
 			//Print accumulated data
+		if (sensor == null) {
+			sensor = this.GetComponent<Sensors> ();
+		}
 		Debug.Log(sensor.SerializeList());
 
 		string url = "http://localhost:8000/sendDrivingData";
@@ -71,6 +72,10 @@ public class SendData : MonoBehaviour {
 			float number = obj.list[i].n;
 			switch(key) {
 			case "shouldAccelerate":
+				//If we are moving straight and we are in front of the wall, override and break
+				if(Sensors.scaledForward < 0.2f && number == 1 && MoveCar.shouldNotTurn == 1 && MoveCar.mySpeed > 30f) {
+					number = 0;
+				}
 				MoveCar.shouldAccelerate = number;
 				break;
 			case "shouldTurnLeft":

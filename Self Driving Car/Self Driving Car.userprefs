@@ -1,11 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Menu.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\InstantiateTaxi.cs">
     <Files>
-      <File FileName="Assets\Scripts\SendData.cs" Line="10" Column="39" />
-      <File FileName="Assets\Scripts\MoveCar.cs" Line="110" Column="12" />
-      <File FileName="Assets\Scripts\Sensors.cs" Line="173" Column="42" />
-      <File FileName="Assets\Scripts\Menu.cs" Line="9" Column="4" />
+      <File FileName="Assets\Scripts\SwitchCameras.cs" Line="24" Column="4" />
+      <File FileName="Assets\Scripts\SendData.cs" Line="76" Column="106" />
+      <File FileName="Assets\Scripts\Menu.cs" Line="5" Column="10" />
+      <File FileName="Assets\Scripts\MoveCar.cs" Line="111" Column="25" />
+      <File FileName="Assets\Scripts\Sensors.cs" Line="31" Column="3" />
+      <File FileName="Assets\Scripts\InstantiateTaxi.cs" Line="11" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

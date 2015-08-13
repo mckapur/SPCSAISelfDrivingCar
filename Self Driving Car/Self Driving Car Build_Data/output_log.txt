@@ -1,0 +1,229 @@
+Initialize engine version: 5.1.2f1 (afd2369b692a)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 10.0]
+    Renderer: Intel(R) HD Graphics (ID=0x46)
+    Vendor:   Intel
+    VRAM:     128 MB
+Default GameObject Tag: Finish already registered
+ 
+(Filename:  Line: 83)
+
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\MES\Documents\UnityProjects\Self Driving Car\Self Driving Car Build_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\MES\Documents\UnityProjects\Self Driving Car\Self Driving Car Build_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\MES\Documents\UnityProjects\Self Driving Car\Self Driving Car Build_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\MES\Documents\UnityProjects\Self Driving Car\Self Driving Car Build_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\MES\Documents\UnityProjects\Self Driving Car\Self Driving Car Build_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\MES\Documents\UnityProjects\Self Driving Car\Self Driving Car Build_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\MES\Documents\UnityProjects\Self Driving Car\Self Driving Car Build_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\MES\Documents\UnityProjects\Self Driving Car\Self Driving Car Build_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\MES\Documents\UnityProjects\Self Driving Car\Self Driving Car Build_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\MES\Documents\UnityProjects\Self Driving Car\Self Driving Car Build_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\MES\Documents\UnityProjects\Self Driving Car\Self Driving Car Build_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Users\MES\Documents\UnityProjects\Self Driving Car\Self Driving Car Build_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+Platform assembly: C:\Users\MES\Documents\UnityProjects\Self Driving Car\Self Driving Car Build_Data\Managed\ICSharpCode.SharpZipLib.dll (this message is harmless)
+Loading C:\Users\MES\Documents\UnityProjects\Self Driving Car\Self Driving Car Build_Data\Managed\ICSharpCode.SharpZipLib.dll into Unity Child Domain
+- Completed reload, in  0.076 seconds
+desktop: 1440x900 40Hz; virtual: 1440x900 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: C:\Users\MES\Documents\UnityProjects\Self Driving Car\Self Driving Car Build_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\MES\Documents\UnityProjects\Self Driving Car\Self Driving Car Build_Data\Managed\System.dll (this message is harmless)
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 6.255055 ms
+Started again
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+
+Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 476.
+Total: 0.636455 ms (FindLiveObjects: 0.054748 ms CreateObjectMapping: 0.034218 ms MarkObjects: 0.309673 ms  DeleteObjects: 0.236532 ms)
+
+Cleared list
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Started again
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+We had crashed
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Cleared list
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.037661 ms
+
+Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 486.
+Total: 0.594538 ms (FindLiveObjects: 0.041917 ms CreateObjectMapping: 0.022241 ms MarkObjects: 0.375542 ms  DeleteObjects: 0.153981 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.121923 ms
+Started again
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+
+Unloading 50 unused Assets to reduce memory usage. Loaded Objects now: 508.
+Total: 0.563314 ms (FindLiveObjects: 0.035501 ms CreateObjectMapping: 0.020103 ms MarkObjects: 0.310100 ms  DeleteObjects: 0.188199 ms)
+
+Quit
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.940567 ms
+
+Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 452.
+Total: 0.579567 ms (FindLiveObjects: 0.037639 ms CreateObjectMapping: 0.021813 ms MarkObjects: 0.350734 ms  DeleteObjects: 0.168096 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.839197 ms
+Started again
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+
+Unloading 48 unused Assets to reduce memory usage. Loaded Objects now: 508.
+Total: 0.571441 ms (FindLiveObjects: 0.035928 ms CreateObjectMapping: 0.020530 ms MarkObjects: 0.325498 ms  DeleteObjects: 0.187343 ms)
+
+Quit
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.933724 ms
+
+Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 452.
+Total: 0.548771 ms (FindLiveObjects: 0.032079 ms CreateObjectMapping: 0.018392 ms MarkObjects: 0.330203 ms  DeleteObjects: 0.166385 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.940995 ms
+Started again
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+
+Unloading 48 unused Assets to reduce memory usage. Loaded Objects now: 508.
+Total: 0.556470 ms (FindLiveObjects: 0.031223 ms CreateObjectMapping: 0.023097 ms MarkObjects: 0.318655 ms  DeleteObjects: 0.182638 ms)
+
+Quit
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.103531 ms
+
+Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 452.
+Total: 0.551337 ms (FindLiveObjects: 0.031651 ms CreateObjectMapping: 0.018392 ms MarkObjects: 0.336619 ms  DeleteObjects: 0.163391 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.257084 ms
+Started again
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+
+Unloading 48 unused Assets to reduce memory usage. Loaded Objects now: 480.
+Total: 0.780170 ms (FindLiveObjects: 0.051327 ms CreateObjectMapping: 0.032507 ms MarkObjects: 0.446117 ms  DeleteObjects: 0.248936 ms)
+
+Cleared list
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Started again
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+We had crashed
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Cleared list
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.064608 ms
+
+Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 486.
+Total: 0.754507 ms (FindLiveObjects: 0.039778 ms CreateObjectMapping: 0.026518 ms MarkObjects: 0.486323 ms  DeleteObjects: 0.199320 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.934579 ms
+Started again
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Sending data..
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+{"data":[{"scaledForward":0.9439992,"scaledLeftRightRatio":0.4955921,"isAccelerating":0,"scaledSpeed":0.006841909,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.9439988,"scaledLeftRightRatio":0.4955925,"isAccelerating":0,"scaledSpeed":0.0002413948,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.9439999,"scaledLeftRightRatio":0.4955919,"isAccelerating":0,"scaledSpeed":0.0001404272,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.9440001,"scaledLeftRightRatio":0.4955918,"isAccelerating":0,"scaledSpeed":5.808528E-06,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.9438722,"scaledLeftRightRatio":0.4955918,"isAccelerating":1,"scaledSpeed":0.006123215,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.9421231,"scaledLeftRightRatio":0.4955914,"isAccelerating":1,"scaledSpeed":0.02658663,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.9418026,"scaledLeftRightRatio":0.4955916,"isAccelerating":1,"scaledSpeed":0.02885448,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.9372122,"scaledLeftRightRatio":0.4955912,"isAccelerating":1,"scaledSpeed":0.05150256,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.9366148,"scaledLeftRightRatio":0.4955911,"isAccelerating":1,"scaledSpeed":0.05376452,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.9301083,"scaledLeftRightRatio":0.4955912,"isAccelerating":1,"scaledSpeed":0.07409425,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.92926,"scaledLeftRightRatio":0.4955918,"isAccelerating":1,"scaledSpeed":0.07634971,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.9194001,"scaledLeftRightRatio":0.4955914,"isAccelerating":1,"scaledSpeed":0.09886441,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.9194001,"scaledLeftRightRatio":0.4955914,"isAccelerating":1,"scaledSpeed":0.09886441,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.9056702,"scaledLeftRightRatio":0.4955918,"isAccelerating":1,"scaledSpeed":0.123547,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.9056702,"scaledLeftRightRatio":0.4955918,"isAccelerating":1,"scaledSpeed":0.123547,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.8905754,"scaledLeftRightRatio":0.4955917,"isAccelerating":1,"scaledSpeed":0.1459113,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.8905754,"scaledLeftRightRatio":0.4955917,"isAccelerating":1,"scaledSpeed":0.1459113,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.8691877,"scaledLeftRightRatio":0.495592,"isAccelerating":1,"scaledSpeed":0.1726603,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.8691877,"scaledLeftRightRatio":0.495592,"isAccelerating":1,"scaledSpeed":0.1726603,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.8486338,"scaledLeftRightRatio":0.4955922,"isAccelerating":1,"scaledSpeed":0.195371,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.8486338,"scaledLeftRightRatio":0.4955922,"isAccelerating":1,"scaledSpeed":0.195371,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.8232012,"scaledLeftRightRatio":0.4955914,"isAccelerating":1,"scaledSpeed":0.2172678,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.8232012,"scaledLeftRightRatio":0.4955914,"isAccelerating":1,"scaledSpeed":0.2172678,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.7978267,"scaledLeftRightRatio":0.495592,"isAccelerating":1,"scaledSpeed":0.2451726,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.7978267,"scaledLeftRightRatio":0.495592,"isAccelerating":1,"scaledSpeed":0.2451726,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.7663943,"scaledLeftRightRatio":0.4955914,"isAccelerating":1,"scaledSpeed":0.265533,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.7663943,"scaledLeftRightRatio":0.4955914,"isAccelerating":1,"scaledSpeed":0.265533,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.7319584,"scaledLeftRightRatio":0.4955916,"isAccelerating":1,"scaledSpeed":0.2930069,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.7319584,"scaledLeftRightRatio":0.4955916,"isAccelerating":1,"scaledSpeed":0.2930069,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.694595,"scaledLeftRightRatio":0.4955911,"isAccelerating":1,"scaledSpeed":0.3146913,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.694595,"scaledLeftRightRatio":0.4955911,"isAccelerating":1,"scaledSpeed":0.3146913,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.6542603,"scaledLeftRightRatio":0.4955913,"isAccelerating":1,"scaledSpeed":0.3396761,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.6542603,"scaledLeftRightRatio":0.4955913,"isAccelerating":1,"scaledSpeed":0.3396761,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.6109959,"scaledLeftRightRatio":0.4955917,"isAccelerating":1,"scaledSpeed":0.3634767,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.6109959,"scaledLeftRightRatio":0.4955917,"isAccelerating":1,"scaledSpeed":0.3634767,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.5691283,"scaledLeftRightRatio":0.4955914,"isAccelerating":1,"scaledSpeed":0.3850988,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.5691283,"scaledLeftRightRatio":0.4955914,"isAccelerating":1,"scaledSpeed":0.3850988,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.5202935,"scaledLeftRightRatio":0.4955916,"isAccelerating":1,"scaledSpeed":0.408806,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.5202935,"scaledLeftRightRatio":0.4955916,"isAccelerating":1,"scaledSpeed":0.408806,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.4637084,"scaledLeftRightRatio":0.4955916,"isAccelerating":1,"scaledSpeed":0.4345772,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.4637084,"scaledLeftRightRatio":0.4955916,"isAccelerating":1,"scaledSpeed":0.4345772,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.4139239,"scaledLeftRightRatio":0.4955921,"isAccelerating":1,"scaledSpeed":0.4559807,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.4139239,"scaledLeftRightRatio":0.4955921,"isAccelerating":1,"scaledSpeed":0.4559807,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.3605298,"scaledLeftRightRatio":0.4955919,"isAccelerating":1,"scaledSpeed":0.4794489,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.3605298,"scaledLeftRightRatio":0.4955919,"isAccelerating":1,"scaledSpeed":0.4794489,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.299466,"scaledLeftRightRatio":0.4955918,"isAccelerating":0,"scaledSpeed":0.5007219,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.299466,"scaledLeftRightRatio":0.4955918,"isAccelerating":0,"scaledSpeed":0.5007219,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.2425143,"scaledLeftRightRatio":0.4955918,"isAccelerating":0,"scaledSpeed":0.5023569,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.2425143,"scaledLeftRightRatio":0.4955918,"isAccelerating":0,"scaledSpeed":0.5023569,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.1864923,"scaledLeftRightRatio":0.4769755,"isAccelerating":0,"scaledSpeed":0.4479216,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.1864923,"scaledLeftRightRatio":0.4769755,"isAccelerating":0,"scaledSpeed":0.4479216,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.189316,"scaledLeftRightRatio":0.5,"isAccelerating":1,"scaledSpeed":0.4146303,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.189316,"scaledLeftRightRatio":0.5,"isAccelerating":1,"scaledSpeed":0.4146303,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.2388685,"scaledLeftRightRatio":0.5396403,"isAccelerating":1,"scaledSpeed":0.4270804,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.2388685,"scaledLeftRightRatio":0.5396403,"isAccelerating":1,"scaledSpeed":0.4270804,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.3368004,"scaledLeftRightRatio":0.421457,"isAccelerating":1,"scaledSpeed":0.439089,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.3368004,"scaledLeftRightRatio":0.421457,"isAccelerating":1,"scaledSpeed":0.439089,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.7273998,"scaledLeftRightRatio":0.4307732,"isAccelerating":1,"scaledSpeed":0.4632011,"isTurningLeft":1,"isTurningRight":0,"isKeepingStraight":0},{"scaledForward":0.7273998,"scaledLeftRightRatio":0.4307732,"isAccelerating":1,"scaledSpeed":0.4632011,"isTurningLeft":1,"isTurningRight":0,"isKeepingStraight":0},{"scaledForward":0.6670102,"scaledLeftRightRatio":0.5203217,"isAccelerating":1,"scaledSpeed":0.4926031,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.6670102,"scaledLeftRightRatio":0.5203217,"isAccelerating":1,"scaledSpeed":0.4926031,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.6117179,"scaledLeftRightRatio":0.5889031,"isAccelerating":1,"scaledSpeed":0.5205293,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.6117179,"scaledLeftRightRatio":0.5889031,"isAccelerating":1,"scaledSpeed":0.5205293,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.5432094,"scaledLeftRightRatio":0.5786018,"isAccelerating":1,"scaledSpeed":0.5463139,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.5432094,"scaledLeftRightRatio":0.5786018,"isAccelerating":1,"scaledSpeed":0.5463139,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.4828171,"scaledLeftRightRatio":0.5834169,"isAccelerating":1,"scaledSpeed":0.5732176,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.4828171,"scaledLeftRightRatio":0.5834169,"isAccelerating":1,"scaledSpeed":0.5732176,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.4172012,"scaledLeftRightRatio":0.5863405,"isAccelerating":1,"scaledSpeed":0.6004828,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.4172012,"scaledLeftRightRatio":0.5863405,"isAccelerating":1,"scaledSpeed":0.6004828,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.3408247,"scaledLeftRightRatio":0.5866489,"isAccelerating":1,"scaledSpeed":0.6303994,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.3408247,"scaledLeftRightRatio":0.5866489,"isAccelerating":1,"scaledSpeed":0.6303994,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.2550093,"scaledLeftRightRatio":0.490867,"isAccelerating":0,"scaledSpeed":0.6073166,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.2550093,"scaledLeftRightRatio":0.490867,"isAccelerating":0,"scaledSpeed":0.6073166,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.1942321,"scaledLeftRightRatio":0.4342534,"isAccelerating":0,"scaledSpeed":0.5695226,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.1942321,"scaledLeftRightRatio":0.4342534,"isAccelerating":0,"scaledSpeed":0.5695226,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.1485516,"scaledLeftRightRatio":0.5,"isAccelerating":0,"scaledSpeed":0.5081699,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.1485516,"scaledLeftRightRatio":0.5,"isAccelerating":0,"scaledSpeed":0.5081699,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.1376163,"scaledLeftRightRatio":0.6322226,"isAccelerating":0,"scaledSpeed":0.4522003,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.1376163,"scaledLeftRightRatio":0.6322226,"isAccelerating":0,"scaledSpeed":0.4522003,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.2011525,"scaledLeftRightRatio":0.7146775,"isAccelerating":0,"scaledSpeed":0.3959957,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.2011525,"scaledLeftRightRatio":0.7146775,"isAccelerating":0,"scaledSpeed":0.3959957,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.7609832,"scaledLeftRightRatio":0.6461405,"isAccelerating":0,"scaledSpeed":0.3469478,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.7609832,"scaledLeftRightRatio":0.6461405,"isAccelerating":0,"scaledSpeed":0.3469478,"isTurningLeft":0,"isTurningRight":1,"isKeepingStraight":0},{"scaledForward":0.7193334,"scaledLeftRightRatio":0.5319358,"isAccelerating":1,"scaledSpeed":0.3569981,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.7193334,"scaledLeftRightRatio":0.5319358,"isAccelerating":1,"scaledSpeed":0.3569981,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.676272,"scaledLeftRightRatio":0.4880274,"isAccelerating":1,"scaledSpeed":0.3854764,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.676272,"scaledLeftRightRatio":0.4880274,"isAccelerating":1,"scaledSpeed":0.3854764,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.6317916,"scaledLeftRightRatio":0.4973539,"isAccelerating":1,"scaledSpeed":0.4101857,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.6317916,"scaledLeftRightRatio":0.4973539,"isAccelerating":1,"scaledSpeed":0.4101857,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.581191,"scaledLeftRightRatio":0.5133077,"isAccelerating":1,"scaledSpeed":0.4384649,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.581191,"scaledLeftRightRatio":0.5133077,"isAccelerating":1,"scaledSpeed":0.4384649,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.5249339,"scaledLeftRightRatio":0.5203319,"isAccelerating":1,"scaledSpeed":0.4695186,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.5249339,"scaledLeftRightRatio":0.5203319,"isAccelerating":1,"scaledSpeed":0.4695186,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.4754626,"scaledLeftRightRatio":0.5274063,"isAccelerating":1,"scaledSpeed":0.4976268,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.4754626,"scaledLeftRightRatio":0.5274063,"isAccelerating":1,"scaledSpeed":0.4976268,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.4118096,"scaledLeftRightRatio":0.5361074,"isAccelerating":1,"scaledSpeed":0.5283324,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.4118096,"scaledLeftRightRatio":0.5361074,"isAccelerating":1,"scaledSpeed":0.5283324,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.3444098,"scaledLeftRightRatio":0.5455176,"isAccelerating":1,"scaledSpeed":0.5588091,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.3444098,"scaledLeftRightRatio":0.5455176,"isAccelerating":1,"scaledSpeed":0.5588091,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.2739953,"scaledLeftRightRatio":0.555416,"isAccelerating":0,"scaledSpeed":0.5634664,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.2739953,"scaledLeftRightRatio":0.555416,"isAccelerating":0,"scaledSpeed":0.5634664,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.2086092,"scaledLeftRightRatio":0.497279,"isAccelerating":0,"scaledSpeed":0.5236549,"isTurningLeft":1,"isTurningRight":0,"isKeepingStraight":0},{"scaledForward":0.2086092,"scaledLeftRightRatio":0.497279,"isAccelerating":0,"scaledSpeed":0.5236549,"isTurningLeft":1,"isTurningRight":0,"isKeepingStraight":0},{"scaledForward":0.1617547,"scaledLeftRightRatio":0.483347,"isAccelerating":0,"scaledSpeed":0.4682998,"isTurningLeft":1,"isTurningRight":0,"isKeepingStraight":0},{"scaledForward":0.1617547,"scaledLeftRightRatio":0.483347,"isAccelerating":0,"scaledSpeed":0.4682998,"isTurningLeft":1,"isTurningRight":0,"isKeepingStraight":0},{"scaledForward":0.1487333,"scaledLeftRightRatio":0.4251096,"isAccelerating":0,"scaledSpeed":0.4095652,"isTurningLeft":1,"isTurningRight":0,"isKeepingStraight":0},{"scaledForward":0.1487333,"scaledLeftRightRatio":0.4251096,"isAccelerating":0,"scaledSpeed":0.4095652,"isTurningLeft":1,"isTurningRight":0,"isKeepingStraight":0},{"scaledForward":0.1862981,"scaledLeftRightRatio":0.3411138,"isAccelerating":0,"scaledSpeed":0.3591482,"isTurningLeft":1,"isTurningRight":0,"isKeepingStraight":0},{"scaledForward":0.1862981,"scaledLeftRightRatio":0.3411138,"isAccelerating":0,"scaledSpeed":0.3591482,"isTurningLeft":1,"isTurningRight":0,"isKeepingStraight":0},{"scaledForward":0.5663751,"scaledLeftRightRatio":0.4005332,"isAccelerating":0,"scaledSpeed":0.3104344,"isTurningLeft":1,"isTurningRight":0,"isKeepingStraight":0},{"scaledForward":0.5663751,"scaledLeftRightRatio":0.4005332,"isAccelerating":0,"scaledSpeed":0.3104344,"isTurningLeft":1,"isTurningRight":0,"isKeepingStraight":0},{"scaledForward":0.9836292,"scaledLeftRightRatio":0.477533,"isAccelerating":1,"scaledSpeed":0.2994788,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.9836292,"scaledLeftRightRatio":0.477533,"isAccelerating":1,"scaledSpeed":0.2994788,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.943903,"scaledLeftRightRatio":0.476823,"isAccelerating":1,"scaledSpeed":0.3313061,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.943903,"scaledLeftRightRatio":0.476823,"isAccelerating":1,"scaledSpeed":0.3313061,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.9054323,"scaledLeftRightRatio":0.4683979,"isAccelerating":1,"scaledSpeed":0.3603809,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.9054323,"scaledLeftRightRatio":0.4683979,"isAccelerating":1,"scaledSpeed":0.3603809,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.8592502,"scaledLeftRightRatio":0.4579608,"isAccelerating":1,"scaledSpeed":0.3921178,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.8592502,"scaledLeftRightRatio":0.4579608,"isAccelerating":1,"scaledSpeed":0.3921178,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.8061249,"scaledLeftRightRatio":0.4632582,"isAccelerating":1,"scaledSpeed":0.4233124,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.8061249,"scaledLeftRightRatio":0.4632582,"isAccelerating":1,"scaledSpeed":0.4233124,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.749689,"scaledLeftRightRatio":0.4748381,"isAccelerating":1,"scaledSpeed":0.4545206,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.749689,"scaledLeftRightRatio":0.4748381,"isAccelerating":1,"scaledSpeed":0.4545206,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.697522,"scaledLeftRightRatio":0.4827574,"isAccelerating":1,"scaledSpeed":0.4827214,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.697522,"scaledLeftRightRatio":0.4827574,"isAccelerating":1,"scaledSpeed":0.4827214,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.6459525,"scaledLeftRightRatio":0.4914242,"isAccelerating":1,"scaledSpeed":0.5107452,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.6459525,"scaledLeftRightRatio":0.4914242,"isAccelerating":1,"scaledSpeed":0.5107452,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.584766,"scaledLeftRightRatio":0.5007998,"isAccelerating":1,"scaledSpeed":0.53858,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.584766,"scaledLeftRightRatio":0.5007998,"isAccelerating":1,"scaledSpeed":0.53858,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.518307,"scaledLeftRightRatio":0.5115416,"isAccelerating":0,"scaledSpeed":0.5306734,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.518307,"scaledLeftRightRatio":0.5115416,"isAccelerating":0,"scaledSpeed":0.5306734,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.4601847,"scaledLeftRightRatio":0.521669,"isAccelerating":0,"scaledSpeed":0.4925881,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.4601847,"scaledLeftRightRatio":0.521669,"isAccelerating":0,"scaledSpeed":0.4925881,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.4018579,"scaledLeftRightRatio":0.5310572,"isAccelerating":0,"scaledSpeed":0.4547375,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.4018579,"scaledLeftRightRatio":0.5310572,"isAccelerating":0,"scaledSpeed":0.4547375,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.3481942,"scaledLeftRightRatio":0.5397007,"isAccelerating":0,"scaledSpeed":0.4171152,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.3481942,"scaledLeftRightRatio":0.5397007,"isAccelerating":0,"scaledSpeed":0.4171152,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.299165,"scaledLeftRightRatio":0.5476033,"isAccelerating":0,"scaledSpeed":0.37972,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.299165,"scaledLeftRightRatio":0.5476033,"isAccelerating":0,"scaledSpeed":0.37972,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.2585912,"scaledLeftRightRatio":0.5541467,"isAccelerating":0,"scaledSpeed":0.3459206,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.2585912,"scaledLeftRightRatio":0.5541467,"isAccelerating":0,"scaledSpeed":0.3459206,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.221796,"scaledLeftRightRatio":0.5600876,"isAccelerating":0,"scaledSpeed":0.3139561,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.221796,"scaledLeftRightRatio":0.5600876,"isAccelerating":0,"scaledSpeed":0.3139561,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.1856695,"scaledLeftRightRatio":0.5659192,"isAccelerating":0,"scaledSpeed":0.2733217,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.1856695,"scaledLeftRightRatio":0.5659192,"isAccelerating":0,"scaledSpeed":0.2733217,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.1566796,"scaledLeftRightRatio":0.570604,"isAccelerating":0,"scaledSpeed":0.2431343,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.1566796,"scaledLeftRightRatio":0.570604,"isAccelerating":0,"scaledSpeed":0.2431343,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.1290701,"scaledLeftRightRatio":0.5750117,"isAccelerating":0,"scaledSpeed":0.2067773,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.1290701,"scaledLeftRightRatio":0.5750117,"isAccelerating":0,"scaledSpeed":0.2067773,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.1038568,"scaledLeftRightRatio":0.5792471,"isAccelerating":0,"scaledSpeed":0.1682156,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.1038568,"scaledLeftRightRatio":0.5792471,"isAccelerating":0,"scaledSpeed":0.1682156,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.08742699,"scaledLeftRightRatio":0.5819578,"isAccelerating":0,"scaledSpeed":0.1282979,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.08742699,"scaledLeftRightRatio":0.5819578,"isAccelerating":0,"scaledSpeed":0.1282979,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.07546431,"scaledLeftRightRatio":0.5839139,"isAccelerating":0,"scaledSpeed":0.08863215,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.07546431,"scaledLeftRightRatio":0.5839139,"isAccelerating":0,"scaledSpeed":0.08863215,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.06744928,"scaledLeftRightRatio":0.5852251,"isAccelerating":0,"scaledSpeed":0.04501804,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.06744928,"scaledLeftRightRatio":0.5852251,"isAccelerating":0,"scaledSpeed":0.04501804,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.06488956,"scaledLeftRightRatio":0.5856455,"isAccelerating":0,"scaledSpeed":0.00855727,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.06488956,"scaledLeftRightRatio":0.5856455,"isAccelerating":0,"scaledSpeed":0.00855727,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.0648915,"scaledLeftRightRatio":0.5856545,"isAccelerating":0,"scaledSpeed":0.00855727,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.0648915,"scaledLeftRightRatio":0.5856545,"isAccelerating":0,"scaledSpeed":0.00855727,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.06489227,"scaledLeftRightRatio":0.5856576,"isAccelerating":0,"scaledSpeed":0.00855727,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.06489227,"scaledLeftRightRatio":0.5856576,"isAccelerating":0,"scaledSpeed":0.00855727,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.06489227,"scaledLeftRightRatio":0.5856576,"isAccelerating":0,"scaledSpeed":0.00855727,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.06489227,"scaledLeftRightRatio":0.5856576,"isAccelerating":0,"scaledSpeed":0.00855727,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.06489227,"scaledLeftRightRatio":0.5856576,"isAccelerating":0,"scaledSpeed":0.00855727,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1},{"scaledForward":0.06489227,"scaledLeftRightRatio":0.5856576,"isAccelerating":0,"scaledSpeed":0.00855727,"isTurningLeft":0,"isTurningRight":0,"isKeepingStraight":1}],"types":["motion","steering"]}
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Cleared list
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Quit
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+
+Unloading 50 unused Assets to reduce memory usage. Loaded Objects now: 480.
+Total: 1.331081 ms (FindLiveObjects: 0.059453 ms CreateObjectMapping: 0.020958 ms MarkObjects: 0.998738 ms  DeleteObjects: 0.251074 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.465814 ms
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 452.
+Total: 0.944417 ms (FindLiveObjects: 0.029085 ms CreateObjectMapping: 0.021386 ms MarkObjects: 0.728416 ms  DeleteObjects: 0.164674 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.973930 ms
+Started again
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+
+Unloading 48 unused Assets to reduce memory usage. Loaded Objects now: 480.
+Total: 0.958532 ms (FindLiveObjects: 0.040206 ms CreateObjectMapping: 0.020103 ms MarkObjects: 0.712162 ms  DeleteObjects: 0.184777 ms)
+
+Quit
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.886246 ms
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 452.
+Total: 0.931585 ms (FindLiveObjects: 0.030796 ms CreateObjectMapping: 0.018819 ms MarkObjects: 0.720717 ms  DeleteObjects: 0.160396 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.822088 ms
+Started again
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+
+Unloading 48 unused Assets to reduce memory usage. Loaded Objects now: 480.
+Total: 0.965376 ms (FindLiveObjects: 0.038495 ms CreateObjectMapping: 0.020103 ms MarkObjects: 0.721572 ms  DeleteObjects: 0.183921 ms)
+
+Quit
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.140315 ms
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 452.
+Total: 1.195064 ms (FindLiveObjects: 0.041917 ms CreateObjectMapping: 0.026518 ms MarkObjects: 0.959387 ms  DeleteObjects: 0.165957 ms)
+
